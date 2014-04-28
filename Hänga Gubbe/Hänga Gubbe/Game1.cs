@@ -20,8 +20,8 @@ namespace Hänga_Gubbe
         
 
         WordManager wordManager = new WordManager();
-        
 
+        int integer;
         public Game1()
             : base()
         {
