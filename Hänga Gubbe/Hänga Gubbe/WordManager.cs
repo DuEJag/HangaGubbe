@@ -13,7 +13,7 @@ namespace Hänga_Gubbe
     class WordManager
     {
         StreamReader sR;
-        SpriteFont font;
+        
         List<string> strings = new List<string>();
         int wordint;
         Random rnd = new Random();
@@ -38,7 +38,7 @@ namespace Hänga_Gubbe
         public void LoadContent(ContentManager Content)
         {
             sR = new StreamReader(@"Content/Ord.txt");
-            font = Content.Load<SpriteFont>("Font1");
+            TextureManager.font = Content.Load<SpriteFont>("Font1");
 
             while (!sR.EndOfStream)
             {
@@ -222,7 +222,7 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, strings[wordint], new Vector2(200, 200), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(200, 200), Color.Black);
 
             for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
             {
@@ -231,12 +231,12 @@ namespace Hänga_Gubbe
                     if (strings[wordint][letterIndex] == testedChar)
                     {
                         //Console.WriteLine("" + strings[wordint][i]);
-                        spriteBatch.DrawString(font, "" + strings[wordint][letterIndex], new Vector2(20 * letterIndex, 300), Color.Black);
+                        spriteBatch.DrawString(TextureManager.font, "" + strings[wordint][letterIndex], new Vector2(20 * letterIndex, 300), Color.Black);
                     }
                     if (strings[wordint][letterIndex] != ' ')
                     {
                         //Console.WriteLine("" + strings[wordint][i]);
-                        spriteBatch.DrawString(font, "_", new Vector2(20 * letterIndex, 300), Color.Black);
+                        spriteBatch.DrawString(TextureManager.font, "_", new Vector2(20 * letterIndex, 300), Color.Black);
                     }
                 }
             }

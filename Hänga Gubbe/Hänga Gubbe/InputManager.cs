@@ -12,6 +12,8 @@ namespace Hänga_Gubbe
 {
     class InputManager
     {
+        MouseState mouseState;
+        MouseState oldMouseState;
 
         public InputManager()
         {
@@ -23,6 +25,22 @@ namespace Hänga_Gubbe
             
         }
 
+        public Rectangle MousePos()
+        {
+            return new Rectangle((int)mouseState.X, (int)mouseState.Y, 1, 1);
+        }
+
+        public bool MouseClick()
+        {
+            oldMouseState = mouseState;
+            mouseState = Mouse.GetState();
+            if (mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
+            {
+                return true;
+            }
+            return false;
+        }
+        
         public char PressedButton()
         {
             #region PressedChars

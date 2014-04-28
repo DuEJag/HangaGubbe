@@ -17,10 +17,9 @@ namespace Hänga_Gubbe
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D tex;
-        
-
         WordManager wordManager = new WordManager();
-
+        ButtonManager buttonManager;
+        TextureManager textureManager;
         int integer;
         public Game1()
             : base()
@@ -37,17 +36,19 @@ namespace Hänga_Gubbe
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            tex = Content.Load<Texture2D>("astroid");
-
+            //tex = Content.Load<Texture2D>("astroid");
+            textureManager = new TextureManager(this.Content);
+            buttonManager = new ButtonManager();
             wordManager.LoadContent(this.Content);
-            
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            IsMouseVisible = true;
             wordManager.Update();
+            buttonManager.Update(gameTime);
             base.Update(gameTime);
         }
 
@@ -56,6 +57,7 @@ namespace Hänga_Gubbe
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             //spriteBatch.Draw(tex, Vector2.Zero, Color.White);
+            buttonManager.Draw(spriteBatch);
             wordManager.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
