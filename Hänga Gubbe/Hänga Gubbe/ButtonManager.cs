@@ -32,17 +32,17 @@ namespace Hänga_Gubbe
                 b.Update(gameTime);
                 if (inputManager.MouseClick() && b.buttonRec().Intersects(inputManager.MousePos()))
                 {
-                    Console.WriteLine("boo");
+                    Console.WriteLine("ButtonManager: A Button has been clicked.");
                 }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Button b in buttonList)
-            {
-                b.Draw(spriteBatch);
-            }
+            //foreach (Button b in buttonList)
+            //{
+            //    b.Draw(spriteBatch);
+            //}
         }
     }
 }

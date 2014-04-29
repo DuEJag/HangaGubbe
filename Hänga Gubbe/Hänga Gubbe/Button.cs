@@ -12,22 +12,25 @@ namespace Hänga_Gubbe
     class Button
     {
         Texture2D tex;
-        Vector2 pos;
+        public Vector2 pos;
         Rectangle srcRec;
         string buttonText;
         Vector2 textLength;
+
+        //if(this.FUNTION == LETTER){return action = chat.ToLower(buttonText[1])}
 
         public Button(Texture2D tex, Vector2 pos, string buttonText)
         {
             this.tex = tex;
             this.pos = pos;
-            this.srcRec = new Rectangle(0, 0, 100, 100);
+            this.srcRec = new Rectangle(0, 0, tex.Width, tex.Height);
             this.buttonText = buttonText;
+            this.textLength = TextureManager.font.MeasureString(buttonText);
         }
 
         public void Update(GameTime gameTime)
         {
-            textLength = TextureManager.font.MeasureString(buttonText);
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -38,7 +41,17 @@ namespace Hänga_Gubbe
 
         public Rectangle buttonRec()
         {
-            return new Rectangle((int)pos.X, (int)pos.Y, 100, 100);
+            return new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
+        }
+
+        public string TextString()
+        {
+            return buttonText;
+        }
+
+        public char TextChar()
+        {
+            return char.ToLower(buttonText[0]);
         }
     }
 }

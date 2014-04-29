@@ -40,7 +40,12 @@ namespace Hänga_Gubbe
             }
             return false;
         }
-        
+
+        public Vector2 MousePos2()
+        {
+            return new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+        }
+
         public char PressedButton()
         {
             #region PressedChars

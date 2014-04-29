@@ -13,14 +13,17 @@ namespace Hänga_Gubbe
     class WordManager
     {
         StreamReader sR;
-        
+
         List<string> strings = new List<string>();
         int wordint;
         Random rnd = new Random();
         int[] intArr;
         public static List<char> testedChars = new List<char>();
         InputManager inputManager = new InputManager();
-        
+        TouchKeyboard touchKeyboard = new TouchKeyboard();
+
+        int errors = 0;
+
         public WordManager()
         {
             //testedChars.Add(' ');
@@ -37,6 +40,8 @@ namespace Hänga_Gubbe
 
         public void LoadContent(ContentManager Content)
         {
+            touchKeyboard.Initialize();
+
             sR = new StreamReader(@"Content/Ord.txt");
             TextureManager.font = Content.Load<SpriteFont>("Font1");
 
@@ -53,26 +58,36 @@ namespace Hänga_Gubbe
         public void Update()
         {
             inputManager.Update();
-            CheckChars();
+            touchKeyboard.Update();
+            CheckChars(inputManager.PressedButton());
+            CheckChars(touchKeyboard.GetPressedKey());
         }
 
-        void CheckChars()
+        void CheckChars(char aChar)
         {
-            char pressedLetter = inputManager.PressedButton();
+            char pressedLetter = aChar;
             bool isSame = false;
 
-            foreach(char testedChar in testedChars)
+            foreach (char testedChar in testedChars)
             {
                 if (pressedLetter == testedChar)
                     isSame = true;
+
+
             }
+
+
+
             #region CharCheck
             if (isSame == false)
             {
+
+
                 if (pressedLetter == 'a')
                 {
                     testedChars.Add('a');
                     testedChars.Add('A');
+
                 }
                 if (pressedLetter == 'b')
                 {
@@ -214,32 +229,90 @@ namespace Hänga_Gubbe
                     testedChars.Add('ö');
                     testedChars.Add('Ö');
                 }
+
+                if (pressedLetter != ' ')
+                {
+                    bool isCorrect = false;
+
+                    for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
+                    {
+                        if (char.ToLower(strings[wordint][letterIndex]) == pressedLetter)
+                        {
+                            isCorrect = true;
+                        }
+                    }
+
+                    if (isCorrect == false)
+                    {
+                        errors += 1;
+                    }
+                    Console.WriteLine(errors);
+                }
+            }
             #endregion
 
 
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(200, 200), Color.Black);
 
+            //for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
+            //{
+            //    foreach (char testedChar in testedChars)
+            //    {
+            //        //if (strings[wordint][letterIndex] == testedChar)
+            //        //{
+            //        //    //Console.WriteLine("" + strings[wordint][i]);
+            //        //    spriteBatch.DrawString(TextureManager.font, "" + strings[wordint][letterIndex], new Vector2(20 * letterIndex, 300), Color.Black);
+            //        //}
+            //        //if (strings[wordint][letterIndex] != ' ')
+            //        //{
+            //        //    //Console.WriteLine("" + strings[wordint][i]);
+            //        //    spriteBatch.DrawString(TextureManager.font, "_", new Vector2(20 * letterIndex, 300), Color.Black);
+            //        //}
+                    
+            //    }
+            //}
+
+            spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(20, 300), Color.Black);
+
+            touchKeyboard.Draw(spriteBatch);
+        }
+
+        public string GetOutputString()
+        {
+            string output = "";
+
             for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
             {
+                bool solvedLetter = false;
+
                 foreach (char testedChar in testedChars)
                 {
                     if (strings[wordint][letterIndex] == testedChar)
                     {
-                        //Console.WriteLine("" + strings[wordint][i]);
-                        spriteBatch.DrawString(TextureManager.font, "" + strings[wordint][letterIndex], new Vector2(20 * letterIndex, 300), Color.Black);
-                    }
-                    if (strings[wordint][letterIndex] != ' ')
-                    {
-                        //Console.WriteLine("" + strings[wordint][i]);
-                        spriteBatch.DrawString(TextureManager.font, "_", new Vector2(20 * letterIndex, 300), Color.Black);
+                        solvedLetter = true;
                     }
                 }
+
+                if (solvedLetter == true)
+                {
+                    output += strings[wordint][letterIndex];
+                }
+                else
+                {
+                    if (strings[wordint][letterIndex] != ' ')
+                    {
+                        output += '_';
+                    }
+                    else
+                        output += ' ';
+                }
             }
+
+            return output;
         }
     }
 }

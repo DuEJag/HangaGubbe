@@ -20,6 +20,7 @@ namespace Hänga_Gubbe
         WordManager wordManager = new WordManager();
         ButtonManager buttonManager;
         TextureManager textureManager;
+        
         int integer;
         public Game1()
             : base()
@@ -43,10 +44,12 @@ namespace Hänga_Gubbe
         {
             //Window.IsBorderless = true;
             
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //tex = Content.Load<Texture2D>("astroid");
             textureManager = new TextureManager(this.Content);
             buttonManager = new ButtonManager();
+            
             wordManager.LoadContent(this.Content);
         }
 
