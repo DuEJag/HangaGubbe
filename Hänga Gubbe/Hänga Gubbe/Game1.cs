@@ -26,15 +26,23 @@ namespace Hänga_Gubbe
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
         }
 
         protected override void Initialize()
         {
+            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.IsFullScreen = true;
+
+            graphics.ApplyChanges();
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            //Window.IsBorderless = true;
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //tex = Content.Load<Texture2D>("astroid");
             textureManager = new TextureManager(this.Content);
