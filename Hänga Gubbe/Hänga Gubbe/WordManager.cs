@@ -43,7 +43,6 @@ namespace Hänga_Gubbe
             touchKeyboard.Initialize();
 
             sR = new StreamReader(@"Content/Ord.txt");
-            TextureManager.font = Content.Load<SpriteFont>("Font1");
 
             while (!sR.EndOfStream)
             {
@@ -52,7 +51,7 @@ namespace Hänga_Gubbe
             }
             sR.Close();
 
-            wordint = rnd.Next(19);
+            wordint = rnd.Next(17);
         }
 
         public void Update()
@@ -246,7 +245,7 @@ namespace Hänga_Gubbe
                     {
                         errors += 1;
                     }
-                    Console.WriteLine(errors);
+                    //Console.WriteLine(errors);
                 }
             }
             #endregion
@@ -256,7 +255,7 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(200, 200), Color.Black);
+            spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(100, 200), Color.White);
 
             //for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
             //{
@@ -276,8 +275,8 @@ namespace Hänga_Gubbe
             //    }
             //}
 
-            spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(20, 300), Color.Black);
-
+            spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(100, 300), Color.White);
+            spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.White);
             touchKeyboard.Draw(spriteBatch);
         }
 

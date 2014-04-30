@@ -15,8 +15,8 @@ namespace Hänga_Gubbe
         public static SpriteFont font;
         public TextureManager(ContentManager Content)
         {
-            buttonTex = Content.Load<Texture2D>("Button1");
-            font = Content.Load<SpriteFont>("Font1");
+            buttonTex = Content.Load<Texture2D>("Button2");
+            font = Content.Load<SpriteFont>("SpriteFont2");
         }
 
     }

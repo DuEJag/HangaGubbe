@@ -13,7 +13,7 @@ namespace Hänga_Gubbe
     {
         Button[] buttonArray = new Button[29];
         int distance = 110;
-        Vector2 keyboardPosition = new Vector2(1100 / 2, 0);
+        Vector2 keyboardPosition = new Vector2(1100 / 2, 50);
         InputManager inputManager;
         bool isTouched = false;
         char myMessage;
@@ -78,7 +78,7 @@ namespace Hänga_Gubbe
                     {
                         isTouched = true;
                         myMessage = char.ToLower(b.TextChar());
-                        Console.WriteLine(b.TextString());
+                        //Console.WriteLine(b.TextString());
                     }
                 }
                 myOldMouseState = myMouseState;
