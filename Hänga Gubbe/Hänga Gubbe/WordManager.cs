@@ -23,6 +23,7 @@ namespace Hänga_Gubbe
         TouchKeyboard touchKeyboard = new TouchKeyboard();
 
         int errors = 0;
+        int numberOfWords;
 
         public WordManager()
         {
@@ -50,8 +51,8 @@ namespace Hänga_Gubbe
                 strings.Add(s);
             }
             sR.Close();
-
-            wordint = rnd.Next(17);
+            numberOfWords = strings.Count;
+            wordint = rnd.Next(numberOfWords);
         }
 
         public void Update()
@@ -309,6 +310,11 @@ namespace Hänga_Gubbe
                         output += ' ';
                 }
             }
+
+            if (output == strings[wordint])
+                Console.WriteLine("You win!");
+            if (errors == 5)
+                Console.WriteLine("You Lose!");
 
             return output;
         }
