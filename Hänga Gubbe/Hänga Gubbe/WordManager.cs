@@ -250,9 +250,8 @@ namespace Hänga_Gubbe
             }
             #endregion
 
-
         }
-
+        
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(100, 200), Color.White);
@@ -261,17 +260,17 @@ namespace Hänga_Gubbe
             //{
             //    foreach (char testedChar in testedChars)
             //    {
-            //        //if (strings[wordint][letterIndex] == testedChar)
-            //        //{
-            //        //    //Console.WriteLine("" + strings[wordint][i]);
-            //        //    spriteBatch.DrawString(TextureManager.font, "" + strings[wordint][letterIndex], new Vector2(20 * letterIndex, 300), Color.Black);
-            //        //}
-            //        //if (strings[wordint][letterIndex] != ' ')
-            //        //{
-            //        //    //Console.WriteLine("" + strings[wordint][i]);
-            //        //    spriteBatch.DrawString(TextureManager.font, "_", new Vector2(20 * letterIndex, 300), Color.Black);
-            //        //}
-                    
+            //        if (strings[wordint][letterIndex] == testedChar)
+            //        {
+            //            //Console.WriteLine("" + strings[wordint][i]);
+            //            spriteBatch.DrawString(TextureManager.font, "" + strings[wordint][letterIndex], new Vector2(20 * letterIndex, 300), Color.Black);
+            //        }
+            //        if (strings[wordint][letterIndex] != ' ')
+            //        {
+            //            //Console.WriteLine("" + strings[wordint][i]);
+            //            spriteBatch.DrawString(TextureManager.font, "_", new Vector2(20 * letterIndex, 300), Color.Black);
+            //        }
+
             //    }
             //}
 

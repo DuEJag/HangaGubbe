@@ -74,7 +74,7 @@ namespace Hänga_Gubbe
                 myMouseState = Mouse.GetState();
                 if (myMouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (b.buttonRec().Intersects(MousePos()))
+                    if (b.buttonRec().Intersects(MouseRec()))
                     {
                         isTouched = true;
                         myMessage = char.ToLower(b.TextChar());
@@ -85,7 +85,7 @@ namespace Hänga_Gubbe
             }
         }
 
-        public Rectangle MousePos()
+        public Rectangle MouseRec()
         {
             return new Rectangle((int)Mouse.GetState().X, (int)Mouse.GetState().Y, 1, 1);
         }
