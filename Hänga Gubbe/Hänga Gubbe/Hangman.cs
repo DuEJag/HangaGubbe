@@ -13,12 +13,16 @@ namespace Hänga_Gubbe
 
         Texture2D hangmanTex;
         Point amountOfFrames, currentFrame, frameSize;
+        int maxErrors;
 
-        public Hangman(Vector2 pos, Point amountOfFrames, Point frameSize)
+        public Hangman(Vector2 pos, Point amountOfFrames, Point frameSize, int maxErrors)
         {
             this.pos = pos;
             this.frameSize = frameSize;
             this.amountOfFrames = amountOfFrames;
+            this.maxErrors = maxErrors;
+
+            currentFrame.X = amountOfFrames.X - maxErrors -1;
 
             hangmanTex = TextureManager.hangmanTex;
         }
@@ -33,10 +37,8 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (hangmanTex != null)
-            {
-                spriteBatch.Draw(TextureManager.hangmanTex, pos, new Rectangle(currentFrame.X * frameSize.X, currentFrame.Y * frameSize.Y, frameSize.X, frameSize.Y), Color.White);
-            }
+            spriteBatch.Draw(TextureManager.hangmanTex, pos, new Rectangle(currentFrame.X * frameSize.X, currentFrame.Y * frameSize.Y, frameSize.X, frameSize.Y), Color.White);
+            
         }
     }
 }

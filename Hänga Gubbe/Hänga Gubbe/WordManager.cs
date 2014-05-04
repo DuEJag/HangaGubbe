@@ -24,11 +24,12 @@ namespace Hänga_Gubbe
         Hangman theHangman;
 
         int errors = 0;
+        int maxErrors = 5;
         int numberOfWords;
 
         public WordManager()
         {
-            theHangman = new Hangman(new Vector2(250, 0), new Point(12, 0), new Point(150, 250));
+            theHangman = new Hangman(new Vector2(250, 0), new Point(12, 0), new Point(150, 250), maxErrors);
             //testedChars.Add(' ');
             //testedChars.Add('t');
             //testedChars.Add('b');
@@ -318,7 +319,7 @@ namespace Hänga_Gubbe
 
             if (output == strings[wordint])
                 Console.WriteLine("You win!");
-            if (errors == 5)
+            if (errors == maxErrors)
                 Console.WriteLine("You Lose!");
 
             return output;
