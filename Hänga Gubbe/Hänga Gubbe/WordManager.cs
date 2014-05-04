@@ -21,12 +21,14 @@ namespace Hänga_Gubbe
         public static List<char> testedChars = new List<char>();
         InputManager inputManager = new InputManager();
         TouchKeyboard touchKeyboard = new TouchKeyboard();
+        Hangman theHangman;
 
         int errors = 0;
         int numberOfWords;
 
         public WordManager()
         {
+            theHangman = new Hangman(new Vector2(250, 0), new Point(12, 0), new Point(150, 250));
             //testedChars.Add(' ');
             //testedChars.Add('t');
             //testedChars.Add('b');
@@ -245,6 +247,8 @@ namespace Hänga_Gubbe
                     if (isCorrect == false)
                     {
                         errors += 1;
+                        theHangman.NextFrame();
+                        
                     }
                     //Console.WriteLine(errors);
                 }
@@ -278,6 +282,7 @@ namespace Hänga_Gubbe
             spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(100, 300), Color.White);
             spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.White);
             touchKeyboard.Draw(spriteBatch);
+            theHangman.Draw(spriteBatch);
         }
 
         public string GetOutputString()

@@ -49,6 +49,7 @@ namespace Hänga_Gubbe
             //tex = Content.Load<Texture2D>("astroid");
             textureManager = new TextureManager(this.Content);
             buttonManager = new ButtonManager();
+
             
             wordManager.LoadContent(this.Content);
         }
