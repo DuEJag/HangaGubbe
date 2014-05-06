@@ -46,7 +46,7 @@ namespace Hänga_Gubbe
         {
             touchKeyboard.Initialize();
 
-            sR = new StreamReader(@"Content/Länder.txt");
+            sR = new StreamReader(@"Content/Musiker.txt");
 
             while (!sR.EndOfStream)
             {

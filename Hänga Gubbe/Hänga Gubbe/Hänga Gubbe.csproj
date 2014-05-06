@@ -83,6 +83,9 @@
     <Content Include="Content\Moln.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Musiker.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Ord.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
