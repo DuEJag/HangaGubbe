@@ -29,7 +29,7 @@ namespace Hänga_Gubbe
 
         public WordManager()
         {
-            theHangman = new Hangman(new Vector2(250, 0), new Point(12, 0), new Point(150, 250), maxErrors);
+            theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
             //testedChars.Add(' ');
             //testedChars.Add('t');
             //testedChars.Add('b');
@@ -46,7 +46,7 @@ namespace Hänga_Gubbe
         {
             touchKeyboard.Initialize();
 
-            sR = new StreamReader(@"Content/Ord.txt");
+            sR = new StreamReader(@"Content/Länder.txt");
 
             while (!sR.EndOfStream)
             {
@@ -260,7 +260,10 @@ namespace Hänga_Gubbe
         
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(100, 200), Color.White);
+            if (errors == maxErrors)
+            {
+                spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(500, 200), Color.Black); 
+            }
 
             //for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
             //{
@@ -280,8 +283,8 @@ namespace Hänga_Gubbe
             //    }
             //}
 
-            spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(100, 300), Color.White);
-            spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.White);
+            spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(500, 500), Color.White);
+            spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.Black);
             touchKeyboard.Draw(spriteBatch);
             theHangman.Draw(spriteBatch);
         }

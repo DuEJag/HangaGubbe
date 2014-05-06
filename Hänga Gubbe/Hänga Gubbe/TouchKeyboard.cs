@@ -13,7 +13,7 @@ namespace Hänga_Gubbe
     {
         Button[] buttonArray = new Button[29];
         int distance = 110;
-        Vector2 keyboardPosition = new Vector2(1100 / 2, 50);
+        Vector2 keyboardPosition = new Vector2(1100, 300);
         InputManager inputManager;
         bool isTouched = false;
         char myMessage;

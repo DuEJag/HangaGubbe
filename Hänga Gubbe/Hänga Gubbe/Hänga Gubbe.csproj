@@ -77,6 +77,9 @@
     <Content Include="Content\Kullar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Länder.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Moln.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
