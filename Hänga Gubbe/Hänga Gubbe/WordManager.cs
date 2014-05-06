@@ -24,7 +24,7 @@ namespace Hänga_Gubbe
         Hangman theHangman;
 
         int errors = 0;
-        int maxErrors = 5;
+        int maxErrors = 10;
         int numberOfWords;
 
         public WordManager()

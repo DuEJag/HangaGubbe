@@ -20,6 +20,7 @@ namespace Hänga_Gubbe
         WordManager wordManager = new WordManager();
         ButtonManager buttonManager;
         TextureManager textureManager;
+        LayerManager layerManager;
         
         int integer;
         public Game1()
@@ -32,8 +33,8 @@ namespace Hänga_Gubbe
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferHeight = 720;
-            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
             graphics.IsFullScreen = true;
 
             graphics.ApplyChanges();
@@ -49,8 +50,7 @@ namespace Hänga_Gubbe
             //tex = Content.Load<Texture2D>("astroid");
             textureManager = new TextureManager(this.Content);
             buttonManager = new ButtonManager();
-
-            
+            layerManager = new LayerManager();
             wordManager.LoadContent(this.Content);
         }
 
@@ -61,6 +61,8 @@ namespace Hänga_Gubbe
             IsMouseVisible = true;
             wordManager.Update();
             buttonManager.Update(gameTime);
+            layerManager.Update();
+
             base.Update(gameTime);
         }
 
@@ -68,6 +70,7 @@ namespace Hänga_Gubbe
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+            layerManager.Draw(spriteBatch);
             //spriteBatch.Draw(tex, Vector2.Zero, Color.White);
             buttonManager.Draw(spriteBatch);
             wordManager.Draw(spriteBatch);
