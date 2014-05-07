@@ -17,10 +17,11 @@ namespace Hänga_Gubbe
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D tex;
-        WordManager wordManager = new WordManager();
+        WordManager wordManager;
         ButtonManager buttonManager;
         TextureManager textureManager;
         LayerManager layerManager;
+        public static float scaleX, scaleY;
         
         int integer;
         public Game1()
@@ -33,10 +34,12 @@ namespace Hänga_Gubbe
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.PreferredBackBufferWidth = 1920;
+            //graphics.PreferredBackBufferHeight = 1080;
+            //graphics.PreferredBackBufferWidth = 1920;
             graphics.IsFullScreen = true;
 
+            scaleX = (float)Decimal.Divide(1920, GraphicsDevice.DisplayMode.Width);
+            scaleY = (float)Decimal.Divide(1080, GraphicsDevice.DisplayMode.Height);
             graphics.ApplyChanges();
             base.Initialize();
         }
@@ -48,6 +51,7 @@ namespace Hänga_Gubbe
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //tex = Content.Load<Texture2D>("astroid");
+            wordManager = new WordManager();
             textureManager = new TextureManager(this.Content);
             buttonManager = new ButtonManager();
             layerManager = new LayerManager();
@@ -68,8 +72,11 @@ namespace Hänga_Gubbe
 
         protected override void Draw(GameTime gameTime)
         {
+            var vWidth = 1920;
+            var vHeight = 1080;
+            var scale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scale);
             layerManager.Draw(spriteBatch);
             //spriteBatch.Draw(tex, Vector2.Zero, Color.White);
             buttonManager.Draw(spriteBatch);

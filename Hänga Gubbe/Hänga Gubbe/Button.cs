@@ -35,13 +35,13 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, pos, Color.White);
+            spriteBatch.Draw(tex, new Vector2(buttonRec().X, buttonRec().Y), Color.White);
             spriteBatch.DrawString(TextureManager.font, buttonText, new Vector2(buttonRec().X + (tex.Width / 2), buttonRec().Y + (tex.Height / 2)), Color.Black, 0, textLength / 2, 1, SpriteEffects.None, 1);
         }
 
         public Rectangle buttonRec()
         {
-            return new Rectangle((int)pos.X, (int)pos.Y, tex.Width, tex.Height);
+            return new Rectangle((int)(pos.X * Game1.scaleX), (int)(pos.Y * Game1.scaleY), tex.Width, tex.Height);
         }
 
         public string TextString()

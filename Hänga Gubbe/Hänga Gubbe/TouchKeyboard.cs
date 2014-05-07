@@ -12,17 +12,22 @@ namespace Hänga_Gubbe
     class TouchKeyboard
     {
         Button[] buttonArray = new Button[29];
-        int distance = 110;
-        Vector2 keyboardPosition = new Vector2(1100, 300);
+        int distance;
+        Vector2 keyboardPosition;
         InputManager inputManager;
         bool isTouched = false;
         char myMessage;
         MouseState myMouseState = new MouseState();
         MouseState myOldMouseState = new MouseState();
+        float xScale, yScale;
 
         public TouchKeyboard()
         {
             this.inputManager = new InputManager();
+            xScale = (float)Decimal.Divide((decimal)1100, (decimal)Game1.scaleX);
+            yScale = (float)Decimal.Divide((decimal)300, (decimal)Game1.scaleY);
+            this.distance = (int)Decimal.Divide((decimal)110, (decimal)(Game1.scaleX));
+            this.keyboardPosition = new Vector2(xScale, yScale);
         }
 
         public void Initialize()
@@ -87,7 +92,7 @@ namespace Hänga_Gubbe
 
         public Rectangle MouseRec()
         {
-            return new Rectangle((int)Mouse.GetState().X, (int)Mouse.GetState().Y, 1, 1);
+            return new Rectangle((int)(Mouse.GetState().X * Game1.scaleX), (int)(Mouse.GetState().Y * Game1.scaleY), 1, 1);
         }
 
         public char GetPressedKey()
