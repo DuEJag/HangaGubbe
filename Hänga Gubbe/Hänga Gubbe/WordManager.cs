@@ -29,7 +29,7 @@ namespace Hänga_Gubbe
 
         public WordManager()
         {
-            theHangman = new Hangman(new Vector2(250, 400), new Point(11, 0), new Point(150, 250), maxErrors);
+            theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
             //testedChars.Add(' ');
             //testedChars.Add('t');
             //testedChars.Add('b');
