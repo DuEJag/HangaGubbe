@@ -30,10 +30,10 @@ namespace Hänga_Gubbe
             foreach (Button b in buttonList)
             {
                 b.Update(gameTime);
-                if (inputManager.MouseClick() && b.buttonRec().Intersects(inputManager.MousePos()))
-                {
-                    Console.WriteLine("ButtonManager: A Button has been clicked.");
-                }
+                //if (inputManager.MouseClick() && b.buttonRec().Intersects(inputManager.MousePos()))
+                //{
+                //    Console.WriteLine("ButtonManager: A Button has been clicked.");
+                //}
             }
         }
 

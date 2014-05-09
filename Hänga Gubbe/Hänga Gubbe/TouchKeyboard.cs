@@ -20,14 +20,24 @@ namespace Hänga_Gubbe
         MouseState myMouseState = new MouseState();
         MouseState myOldMouseState = new MouseState();
         float xScale, yScale;
+        Button mainMenuButton;
+        bool mainMenuIsPressed = false;
+        
 
         public TouchKeyboard()
         {
             this.inputManager = new InputManager();
-            xScale = (float)Decimal.Divide((decimal)1100, (decimal)Game1.scaleX);
-            yScale = (float)Decimal.Divide((decimal)300, (decimal)Game1.scaleY);
+            //xScale = (float)Decimal.Divide((decimal)1100, (decimal)Game1.scaleX);
+            //yScale = (float)Decimal.Divide((decimal)300, (decimal)Game1.scaleY);
             this.distance = (int)Decimal.Divide((decimal)110, (decimal)(Game1.scaleX));
-            this.keyboardPosition = new Vector2(xScale, yScale);
+            this.keyboardPosition = GetScalePos(1100, 300);
+        }
+
+        private Vector2 GetScalePos(int xValue, int yValue)
+        {
+            xScale = (float)Decimal.Divide((decimal)xValue, (decimal)Game1.scaleX);
+            yScale = (float)Decimal.Divide((decimal)yValue, (decimal)Game1.scaleY);
+            return new Vector2(xScale, yScale);
         }
 
         public void Initialize()
@@ -61,6 +71,7 @@ namespace Hänga_Gubbe
             buttonArray[26] = new Button(TextureManager.buttonTex, new Vector2(keyboardPosition.X + distance * 2, keyboardPosition.Y + distance * 4), "Å");
             buttonArray[27] = new Button(TextureManager.buttonTex, new Vector2(keyboardPosition.X + distance * 3, keyboardPosition.Y + distance * 4), "Ä");
             buttonArray[28] = new Button(TextureManager.buttonTex, new Vector2(keyboardPosition.X + distance * 4, keyboardPosition.Y + distance * 4), "Ö");
+            mainMenuButton = new Button(TextureManager.buttonTex, new Vector2(300, 100), "Back");
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -70,6 +81,7 @@ namespace Hänga_Gubbe
                 if (b != null)
                     b.Draw(spriteBatch);
             }
+            mainMenuButton.Draw(spriteBatch);
         }
 
         public void Update()
@@ -79,14 +91,20 @@ namespace Hänga_Gubbe
                 myMouseState = Mouse.GetState();
                 if (myMouseState.LeftButton == ButtonState.Pressed)
                 {
-                    if (b.buttonRec().Intersects(MouseRec()))
+                    if (b.buttonRec().Intersects(inputManager.MouseRec()))
                     {
                         isTouched = true;
                         myMessage = char.ToLower(b.TextChar());
+                        b.Eliminate();
                         //Console.WriteLine(b.TextString());
                     }
                 }
                 myOldMouseState = myMouseState;
+            }
+
+            if (inputManager.MouseRec().Intersects(mainMenuButton.buttonRec()) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                mainMenuIsPressed = true;
             }
         }
 
@@ -100,11 +118,27 @@ namespace Hänga_Gubbe
             if (isTouched == true)
             {
                 isTouched = false;
+
                 return myMessage;
 
             }
 
             return ' ';
+        }
+
+        public bool GetMenuState()
+        {
+            bool returnValue = mainMenuIsPressed;
+            mainMenuIsPressed = false;
+            return returnValue;
+        }
+
+        public void Reset()
+        {
+            foreach (Button eachButton in buttonArray)
+            {
+                eachButton.Reset();
+            }
         }
     }
 }

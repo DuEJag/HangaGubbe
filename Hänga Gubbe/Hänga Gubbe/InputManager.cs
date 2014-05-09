@@ -25,9 +25,9 @@ namespace Hänga_Gubbe
             
         }
 
-        public Rectangle MousePos()
+        public Rectangle MouseRec()
         {
-            return new Rectangle((int)mouseState.X, (int)mouseState.Y, 1, 1);
+            return new Rectangle((int)(Mouse.GetState().X * Game1.scaleX), (int)(Mouse.GetState().Y * Game1.scaleY), 1, 1);
         }
 
         public bool MouseClick()

@@ -30,7 +30,7 @@ namespace Hänga_Gubbe
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(tex, pos + new Vector2(0, -50), Color.White);
-            if (pos.X + tex.Width < 1500)
+            if (pos.X + tex.Width < 2000)
                 sb.Draw(tex, pos + new Vector2(tex.Width, -50), Color.White);
         }
     }

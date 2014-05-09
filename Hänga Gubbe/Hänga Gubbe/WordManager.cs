@@ -27,19 +27,11 @@ namespace Hänga_Gubbe
         int maxErrors = 10;
         int numberOfWords;
 
+        bool isPlaying = true;
+
         public WordManager()
         {
             theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
-            //testedChars.Add(' ');
-            //testedChars.Add('t');
-            //testedChars.Add('b');
-            //testedChars.Add('s');
-            //testedChars.Add('d');
-            //testedChars.Add('f');
-            //testedChars.Add('e');
-            //testedChars.Add('B');
-            //testedChars.Add('v');
-            //testedChars.Add('a');
         }
 
         public void LoadContent(ContentManager Content)
@@ -55,15 +47,27 @@ namespace Hänga_Gubbe
             }
             sR.Close();
             numberOfWords = strings.Count;
-            wordint = rnd.Next(numberOfWords);
+            wordint = rnd.Next(strings.Count);
         }
 
         public void Update()
         {
+            if (errors >= maxErrors || GetOutputString() == strings[wordint])
+            {
+                isPlaying = false;
+            }
             inputManager.Update();
-            touchKeyboard.Update();
-            CheckChars(inputManager.PressedButton());
-            CheckChars(touchKeyboard.GetPressedKey());
+            if (isPlaying == true)
+            {
+                touchKeyboard.Update();
+                CheckChars(inputManager.PressedButton());
+                CheckChars(touchKeyboard.GetPressedKey());
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && isPlaying == false)
+            {
+                ResetWord();
+                isPlaying = true;
+            }
         }
 
         void CheckChars(char aChar)
@@ -74,9 +78,9 @@ namespace Hänga_Gubbe
             foreach (char testedChar in testedChars)
             {
                 if (pressedLetter == testedChar)
+                {
                     isSame = true;
-
-
+                }
             }
 
 
@@ -249,7 +253,7 @@ namespace Hänga_Gubbe
                     {
                         errors += 1;
                         theHangman.NextFrame();
-                        
+
                     }
                     //Console.WriteLine(errors);
                 }
@@ -257,31 +261,13 @@ namespace Hänga_Gubbe
             #endregion
 
         }
-        
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if (errors == maxErrors)
             {
-                spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(500, 200), Color.Black); 
+                spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(500, 200), Color.Black);
             }
-
-            //for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
-            //{
-            //    foreach (char testedChar in testedChars)
-            //    {
-            //        if (strings[wordint][letterIndex] == testedChar)
-            //        {
-            //            //Console.WriteLine("" + strings[wordint][i]);
-            //            spriteBatch.DrawString(TextureManager.font, "" + strings[wordint][letterIndex], new Vector2(20 * letterIndex, 300), Color.Black);
-            //        }
-            //        if (strings[wordint][letterIndex] != ' ')
-            //        {
-            //            //Console.WriteLine("" + strings[wordint][i]);
-            //            spriteBatch.DrawString(TextureManager.font, "_", new Vector2(20 * letterIndex, 300), Color.Black);
-            //        }
-
-            //    }
-            //}
 
             spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(500, 500), Color.White);
             spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.Black);
@@ -311,12 +297,12 @@ namespace Hänga_Gubbe
                 }
                 else
                 {
-                    if (strings[wordint][letterIndex] != ' ')
-                    {
+                    if (strings[wordint][letterIndex] != ' ' && strings[wordint][letterIndex] != '-')
                         output += '_';
-                    }
-                    else
+                    if (strings[wordint][letterIndex] == ' ')
                         output += ' ';
+                    if (strings[wordint][letterIndex] == '-')
+                        output += '-';
                 }
             }
 
@@ -326,6 +312,22 @@ namespace Hänga_Gubbe
                 Console.WriteLine("You Lose!");
 
             return output;
+        }
+
+        public bool GetMenuState()
+        {
+            return touchKeyboard.GetMenuState();
+        }
+
+        public void ResetWord()
+        {
+            isPlaying = true;
+            errors = 0;
+            maxErrors = 10;
+            testedChars = new List<char>();
+            theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
+            wordint = rnd.Next(numberOfWords);
+            touchKeyboard.Reset();
         }
     }
 }

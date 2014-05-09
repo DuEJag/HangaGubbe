@@ -16,6 +16,7 @@ namespace Hänga_Gubbe
         Rectangle srcRec;
         string buttonText;
         Vector2 textLength;
+        bool isClicked = false;
 
         //if(this.FUNTION == LETTER){return action = chat.ToLower(buttonText[1])}
 
@@ -35,8 +36,11 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(tex, new Vector2(buttonRec().X, buttonRec().Y), Color.White);
-            spriteBatch.DrawString(TextureManager.font, buttonText, new Vector2(buttonRec().X + (tex.Width / 2), buttonRec().Y + (tex.Height / 2)), Color.Black, 0, textLength / 2, 1, SpriteEffects.None, 1);
+            if (isClicked == false)
+            {
+                spriteBatch.Draw(tex, new Vector2(buttonRec().X, buttonRec().Y), Color.White);
+                spriteBatch.DrawString(TextureManager.font, buttonText, new Vector2(buttonRec().X + (tex.Width / 2), buttonRec().Y + (tex.Height / 2)), Color.Black, 0, textLength / 2, 1, SpriteEffects.None, 1);
+            }
         }
 
         public Rectangle buttonRec()
@@ -52,6 +56,16 @@ namespace Hänga_Gubbe
         public char TextChar()
         {
             return char.ToLower(buttonText[0]);
+        }
+
+        public void Eliminate()
+        {
+            isClicked = true;
+        }
+
+        public void Reset()
+        {
+            isClicked = false;
         }
     }
 }
