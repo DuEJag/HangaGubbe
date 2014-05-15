@@ -38,8 +38,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AddWordMenu.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="ButtonManager.cs" />
+    <Compile Include="CategoryMenu.cs" />
+    <Compile Include="FileSaver.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Hangman.cs" />
     <Compile Include="InputManager.cs" />
@@ -66,10 +69,13 @@
     <Content Include="Content\Button1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Button18.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Button2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Button3.png">
+    <Content Include="Content\Button4x1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\hangman.png">
@@ -81,6 +87,9 @@
     <Content Include="Content\Länder.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\MinaOrd.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Moln.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -90,9 +99,24 @@
     <Content Include="Content\Ord.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\TitelTest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\TitelTest2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\sffontbmp.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\sffontbmp36.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\sffontbmpStor.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Content\SpriteFont2.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

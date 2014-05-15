@@ -12,8 +12,6 @@ namespace Hänga_Gubbe
     class ButtonManager
     {
         Button button;
-        Texture2D tex;
-        Vector2 pos;
         InputManager inputManager;
 
         List<Button> buttonList = new List<Button>();

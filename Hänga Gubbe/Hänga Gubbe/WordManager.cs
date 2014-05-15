@@ -17,28 +17,31 @@ namespace Hänga_Gubbe
         List<string> strings = new List<string>();
         int wordint;
         Random rnd = new Random();
-        int[] intArr;
         public static List<char> testedChars = new List<char>();
         InputManager inputManager = new InputManager();
-        TouchKeyboard touchKeyboard = new TouchKeyboard();
+        TouchKeyboard touchKeyboard = new TouchKeyboard(true);
         Hangman theHangman;
+        CategoryMenu categoryMenu;
 
         int errors = 0;
         int maxErrors = 10;
         int numberOfWords;
 
         bool isPlaying = true;
+        bool categoryChosen = false;
 
         public WordManager()
         {
             theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
+            categoryMenu = new CategoryMenu();
         }
 
-        public void LoadContent(ContentManager Content)
+        private void Initialize(string category)
         {
             touchKeyboard.Initialize();
 
-            sR = new StreamReader(@"Content/Musiker.txt");
+            sR = new StreamReader(@"Content/" + category + ".txt");
+
 
             while (!sR.EndOfStream)
             {
@@ -48,25 +51,44 @@ namespace Hänga_Gubbe
             sR.Close();
             numberOfWords = strings.Count;
             wordint = rnd.Next(strings.Count);
+
         }
 
         public void Update()
         {
-            if (errors >= maxErrors || GetOutputString() == strings[wordint])
+            //inputManager.Update();
+
+            string category = categoryMenu.Category();
+
+            if (categoryChosen == false && category != "")
             {
-                isPlaying = false;
+                categoryChosen = true;
+                Initialize(category);
             }
-            inputManager.Update();
-            if (isPlaying == true)
+            
+
+            if (categoryChosen == true)
             {
-                touchKeyboard.Update();
-                CheckChars(inputManager.PressedButton());
-                CheckChars(touchKeyboard.GetPressedKey());
+                if (errors >= maxErrors || GetOutputString() == strings[wordint])
+                {
+                    isPlaying = false;
+                }
+                
+                if (isPlaying == true)
+                {
+                    touchKeyboard.Update();
+                    CheckChars(inputManager.PressedButton());
+                    CheckChars(touchKeyboard.GetPressedKey());
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter) && isPlaying == false)
+                {
+                    ResetWord();
+                    isPlaying = true;
+                }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter) && isPlaying == false)
+            else
             {
-                ResetWord();
-                isPlaying = true;
+                categoryMenu.Update();
             }
         }
 
@@ -264,15 +286,22 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (errors == maxErrors)
+            if (categoryChosen == true)
             {
-                spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(500, 200), Color.Black);
-            }
+                if (errors == maxErrors)
+                {
+                    spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(500, 200), Color.Black);
+                }
 
-            spriteBatch.DrawString(TextureManager.font, GetOutputString(), new Vector2(500, 500), Color.White);
-            spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.Black);
-            touchKeyboard.Draw(spriteBatch);
-            theHangman.Draw(spriteBatch);
+                spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(500, 500), Color.White);
+                spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.Black);
+                touchKeyboard.Draw(spriteBatch);
+                theHangman.Draw(spriteBatch);
+            }
+            else
+            {
+                categoryMenu.Draw(spriteBatch);
+            }
         }
 
         public string GetOutputString()

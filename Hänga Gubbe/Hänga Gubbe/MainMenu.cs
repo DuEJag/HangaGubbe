@@ -11,16 +11,28 @@ namespace Hänga_Gubbe
 {
     class MainMenu
     {
+        public enum ButtonPressed
+        {
+            NONE,
+            GAME,
+            WORD
+        }
+
         List<Button> buttonList;
-        InputManager inputManager;
-        bool isPressed = false;
+        ButtonPressed isPressed = ButtonPressed.NONE;
 
         public MainMenu()
         {
             this.buttonList = new List<Button>();
-            this.inputManager = new InputManager();
-            Button playButton = new Button(TextureManager.buttonTex, GetScalePos((1920 / 2 - TextureManager.buttonTex.Width / 2), (1080 / 2 - TextureManager.buttonTex.Height / 2)), "PLAY");
+
+            string playString = "En Spelare";
+            Button playButton = new Button(TextureManager.buttonTex4x1, GetScalePos((1920 / 2 - TextureManager.buttonTex4x1.Width / 2), 
+                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2)), playString);
             buttonList.Add(playButton);
+
+            Button addWordButton = new Button(TextureManager.buttonTex4x1, GetScalePos((1920 / 2 - TextureManager.buttonTex4x1.Width / 2),
+                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 120)), "Lägg Till Ord");
+            buttonList.Add(addWordButton);
         }
 
         private Vector2 GetScalePos(int xValue, int yValue)
@@ -32,11 +44,16 @@ namespace Hänga_Gubbe
 
         public void Update()
         {
+            //inputManager.Update();
             foreach (Button b in buttonList)
             {
-                if (inputManager.MouseRec().Intersects(b.buttonRec()) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                if (InputManager.MouseRec().Intersects(b.buttonRec()) && InputManager.MouseClick())
                 {
-                    isPressed = true;
+                    if(b.TextChar() == 'e')
+                        isPressed = ButtonPressed.GAME;
+
+                    if (b.TextChar() == 'l')
+                        isPressed = ButtonPressed.WORD;
                 }
             }
 
@@ -48,12 +65,14 @@ namespace Hänga_Gubbe
             {
                 b.Draw(spriteBatch);
             }
+            spriteBatch.Draw(TextureManager.titelTex, new Vector2(460, 150), Color.White);
+            //spriteBatch.DrawString(TextureManager.fontStor, "Hänga Gubbe", new Vector2(700, 300), Color.White);
         }
 
-        public bool GetMenuMode()
+        public ButtonPressed GetMenuMode()
         {
-            bool returnValue = isPressed;
-            isPressed = false;
+            ButtonPressed returnValue = isPressed;
+            isPressed = ButtonPressed.NONE;
             return returnValue;
         }
     }

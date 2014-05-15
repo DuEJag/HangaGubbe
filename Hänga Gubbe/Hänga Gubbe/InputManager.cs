@@ -12,28 +12,30 @@ namespace Hänga_Gubbe
 {
     class InputManager
     {
-        MouseState mouseState;
-        MouseState oldMouseState;
+        static MouseState mouseState;
+        static MouseState oldMouseState;
 
         public InputManager()
         {
-
+            mouseState = Mouse.GetState();
+            oldMouseState = mouseState;
         }
 
-        public void Update()
+        public static void Update()
         {
-            
+            oldMouseState = mouseState;
+            mouseState = Mouse.GetState();
         }
 
-        public Rectangle MouseRec()
+        public static Rectangle MouseRec()
         {
             return new Rectangle((int)(Mouse.GetState().X * Game1.scaleX), (int)(Mouse.GetState().Y * Game1.scaleY), 1, 1);
         }
 
-        public bool MouseClick()
+        public static bool MouseClick()
         {
-            oldMouseState = mouseState;
             mouseState = Mouse.GetState();
+
             if (mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released)
             {
                 return true;

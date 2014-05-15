@@ -16,19 +16,20 @@ namespace Hänga_Gubbe
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Texture2D tex;
         WordManager wordManager;
         ButtonManager buttonManager;
         TextureManager textureManager;
         LayerManager layerManager;
         MainMenu mainMenu;
+        AddWordMenu addWordMenu;
+        
         public static float scaleX, scaleY;
 
         enum GameState
         {
             MAIN_MENU,
             PLAYING,
-            OPTIONS_MENU
+            WORD_MENU
         }
 
         GameState currentGameState = GameState.MAIN_MENU;
@@ -60,12 +61,12 @@ namespace Hänga_Gubbe
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //tex = Content.Load<Texture2D>("astroid");
-            wordManager = new WordManager();
             textureManager = new TextureManager(this.Content);
+            wordManager = new WordManager();
             buttonManager = new ButtonManager();
             layerManager = new LayerManager();
-            wordManager.LoadContent(this.Content);
             mainMenu = new MainMenu();
+            addWordMenu = new AddWordMenu();
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,17 +74,49 @@ namespace Hänga_Gubbe
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             IsMouseVisible = true;
-            if (mainMenu.GetMenuMode())
-                currentGameState = GameState.PLAYING;
-            if (wordManager.GetMenuState())
-                currentGameState = GameState.MAIN_MENU;
 
-            if (currentGameState == GameState.PLAYING)
-                wordManager.Update();
+            InputManager.Update();
+
+            MainMenu.ButtonPressed pressedMainMenuButton = mainMenu.GetMenuMode();
+
+            if (pressedMainMenuButton == MainMenu.ButtonPressed.GAME)
+            {
+                currentGameState = GameState.PLAYING;
+            }
+
+            if (pressedMainMenuButton == MainMenu.ButtonPressed.WORD)
+            {
+                currentGameState = GameState.WORD_MENU;
+            }
+
+            if (currentGameState == GameState.PLAYING && wordManager.GetMenuState() == true)
+            {
+                currentGameState = GameState.MAIN_MENU;
+            }
+
+            if (currentGameState == GameState.WORD_MENU && addWordMenu.GetMenuState() == true)
+            {
+                currentGameState = GameState.MAIN_MENU;
+            }
+
             buttonManager.Update(gameTime);
             layerManager.Update();
+
+            if (currentGameState == GameState.PLAYING)
+            {
+                wordManager.Update();
+            }
+
             if (currentGameState == GameState.MAIN_MENU)
+            {
                 mainMenu.Update();
+            }
+
+            if (currentGameState == GameState.WORD_MENU)
+            {
+                addWordMenu.Update();
+            }
+
             base.Update(gameTime);
         }
 
@@ -92,15 +125,22 @@ namespace Hänga_Gubbe
             var vWidth = 1920;
             var vHeight = 1080;
             var scale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f);
+            //Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f)
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scale);
             layerManager.Draw(spriteBatch);
             //spriteBatch.Draw(tex, Vector2.Zero, Color.White);
             buttonManager.Draw(spriteBatch);
+
             if (currentGameState == GameState.PLAYING)
                 wordManager.Draw(spriteBatch);
+
             if (currentGameState == GameState.MAIN_MENU)
                 mainMenu.Draw(spriteBatch);
+
+            if (currentGameState == GameState.WORD_MENU)
+                addWordMenu.Draw(spriteBatch);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
