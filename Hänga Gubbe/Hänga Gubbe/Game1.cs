@@ -126,7 +126,7 @@ namespace Hänga_Gubbe
             var vHeight = 1080;
             var scale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f);
             //Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f)
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.LightBlue);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scale);
             layerManager.Draw(spriteBatch);
             //spriteBatch.Draw(tex, Vector2.Zero, Color.White);

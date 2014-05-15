@@ -38,7 +38,7 @@ namespace Hänga_Gubbe
         {
             if (isClicked == false)
             {
-                spriteBatch.Draw(tex, new Vector2(buttonRec().X, buttonRec().Y), Color.White);
+                spriteBatch.Draw(tex, new Vector2(buttonRec().X, buttonRec().Y), Color.Honeydew);
                 spriteBatch.DrawString(TextureManager.font, buttonText, new Vector2(buttonRec().X + (tex.Width / 2), buttonRec().Y + (tex.Height / 2)), Color.DarkSlateGray, 0, textLength / 2, 1, SpriteEffects.None, 1);
             }
         }

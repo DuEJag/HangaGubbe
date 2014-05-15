@@ -76,6 +76,7 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(TextureManager.keyBackGround, new Vector2(1110, 260), Color.Gray * 0.3f);
             foreach (Button b in buttonArray)
             {
                 if (b != null)

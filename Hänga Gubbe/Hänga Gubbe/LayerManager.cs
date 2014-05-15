@@ -14,7 +14,7 @@ namespace Hänga_Gubbe
 
         public LayerManager()
         {
-            this.backgroundLayer1 = new Layer(new Vector2(0, 500), 0.3f, TextureManager.hillTex);
+            this.backgroundLayer1 = new Layer(new Vector2(0, 410), 0f, TextureManager.hillTex);
             layerList.Add(backgroundLayer1);
             this.backgroundLayer2 = new Layer(new Vector2(0, 0), 0.1f, TextureManager.cloudTex);
             layerList.Add(backgroundLayer2);
