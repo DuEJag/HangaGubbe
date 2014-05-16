@@ -93,9 +93,6 @@
     <Content Include="Content\Länder.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\MinaOrd.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Moln.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

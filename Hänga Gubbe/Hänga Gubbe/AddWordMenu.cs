@@ -22,7 +22,7 @@ namespace Hänga_Gubbe
         }
 
         TouchKeyboard touchKeyboard;
-        string cathegory = "", word = "";
+        string category = "", word = "";
         EntryStage currentEntryStage = EntryStage.WORD;
         Button okButton;
         InputManager InputManager;
@@ -33,7 +33,7 @@ namespace Hänga_Gubbe
             this.touchKeyboard = new TouchKeyboard(false);
             this.touchKeyboard.Initialize();
 
-            okButton = new Button(TextureManager.buttonTex, new Vector2(0, 0), "OK");
+            okButton = new Button(TextureManager.buttonTex4x1, new Vector2(0, 0), "Spara");
             InputManager = new InputManager();
             
         }
@@ -50,7 +50,7 @@ namespace Hänga_Gubbe
             {
                 if(pressedKey != ' ')
                 {
-                    cathegory += pressedKey;
+                    category += pressedKey;
                 }
             }
 
@@ -75,6 +75,13 @@ namespace Hänga_Gubbe
                     currentEntryStage = EntryStage.EXIT;
                 }
             }
+
+            if (currentEntryStage == EntryStage.EXIT)
+            {
+                currentEntryStage = EntryStage.WORD;
+
+                Reset();
+            }
         }
 
 
@@ -82,7 +89,7 @@ namespace Hänga_Gubbe
         {
             touchKeyboard.Draw(spriteBatch);
 
-            spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(500, 500), Color.White);
+            spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(500, 500), Color.DarkSlateGray);
 
             okButton.Draw(spriteBatch);
         }
@@ -94,7 +101,7 @@ namespace Hänga_Gubbe
 
             if (currentEntryStage == EntryStage.CATEGORY)
             {
-                output += cathegory;
+                output += category;
             }
 
             if (currentEntryStage == EntryStage.WORD)
@@ -108,15 +115,6 @@ namespace Hänga_Gubbe
 
         public bool GetMenuState()
         {
-            if(currentEntryStage == EntryStage.EXIT)
-            {
-                currentEntryStage = EntryStage.WORD;
-
-                Reset();
-
-                return true;
-            }
-
             if (touchKeyboard.GetMenuState() == true)
             {
                 Reset();
@@ -128,14 +126,17 @@ namespace Hänga_Gubbe
 
         public void AddWord()
         {
-            fileSaver = new FileSaver("Content", "MinaOrd");
-            fileSaver.AddWord(word);
-            fileSaver.Save();
+            if (word != "")
+            {
+                fileSaver = new FileSaver("Content", "MinaOrd");
+                fileSaver.AddWord(word);
+                fileSaver.Save(); 
+            }
         }
 
         public void Reset()
         {
-            cathegory = "";
+            category = "";
             word = "";
         }
     }
