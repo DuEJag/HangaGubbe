@@ -22,9 +22,13 @@ namespace Hänga_Gubbe
         }
 
         TouchKeyboard touchKeyboard;
-        string category = "", word = "";
+        string category = "", word = "", emptyString = "";
         EntryStage currentEntryStage = EntryStage.WORD;
-        Button okButton;
+
+        Button saveButton;
+        Button clearButton;
+        Button eraseLastCharButton;
+
         InputManager InputManager;
         FileSaver fileSaver;
 
@@ -33,7 +37,10 @@ namespace Hänga_Gubbe
             this.touchKeyboard = new TouchKeyboard(false);
             this.touchKeyboard.Initialize();
 
-            okButton = new Button(TextureManager.buttonTex4x1, new Vector2(0, 0), "Spara");
+            saveButton = new Button(TextureManager.buttonTex4x1, new Vector2(965, 854), "Spara");
+            clearButton = new Button(TextureManager.buttonTex2x1, new Vector2(1365, 854), "Rensa");
+            eraseLastCharButton = new Button(TextureManager.backbuttonTex, new Vector2(1458, 734), "");
+
             InputManager = new InputManager();
             
         }
@@ -62,7 +69,10 @@ namespace Hänga_Gubbe
                 }
             }
 
-            if (InputManager.MouseRec().Intersects(okButton.buttonRec()) && InputManager.MouseClick() == true)
+            EraseLastCharFunction();
+            ClearWordFunction();
+
+            if (InputManager.MouseRec().Intersects(saveButton.buttonRec()) && InputManager.MouseClick() == true)
             {
                 if (currentEntryStage == EntryStage.CATEGORY)
                 {
@@ -91,7 +101,9 @@ namespace Hänga_Gubbe
 
             spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(500, 500), Color.DarkSlateGray);
 
-            okButton.Draw(spriteBatch);
+            saveButton.Draw(spriteBatch);
+            eraseLastCharButton.Draw(spriteBatch);
+            clearButton.Draw(spriteBatch);
         }
 
 
@@ -138,6 +150,23 @@ namespace Hänga_Gubbe
         {
             category = "";
             word = "";
+        }
+
+        public void EraseLastCharFunction()
+        {
+            if(InputManager.MouseRec().Intersects(eraseLastCharButton.buttonRec()) && InputManager.MouseClick() == true)
+            {
+                if(word != emptyString)
+                word = word.Remove(word.Length - 1);
+            }
+        }
+
+        public void ClearWordFunction()
+        {
+            if (InputManager.MouseRec().Intersects(clearButton.buttonRec()) && InputManager.MouseClick() == true)
+            {
+                Reset();
+            }
         }
     }
 }
