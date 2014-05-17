@@ -28,6 +28,7 @@ namespace Hänga_Gubbe
         Button saveButton;
         Button clearButton;
         Button eraseLastCharButton;
+        Button spaceButton;
 
         InputManager InputManager;
         FileSaver fileSaver;
@@ -37,10 +38,10 @@ namespace Hänga_Gubbe
             this.touchKeyboard = new TouchKeyboard(false);
             this.touchKeyboard.Initialize();
 
-            saveButton = new Button(TextureManager.buttonTex4x1, new Vector2(965, 854), "Spara");
-            clearButton = new Button(TextureManager.buttonTex2x1, new Vector2(1365, 854), "Rensa");
-            eraseLastCharButton = new Button(TextureManager.backbuttonTex, new Vector2(1458, 734), "");
-
+            saveButton = new Button(TextureManager.buttonTex2x1, new Vector2(965, 864), "Spara");
+            clearButton = new Button(TextureManager.buttonTex2x1, new Vector2(1165, 864), "Rensa");
+            eraseLastCharButton = new Button(TextureManager.backbuttonTex, new Vector2(1365, 864), "");
+            spaceButton = new Button(TextureManager.spacebuttonTex, new Vector2(1458, 734), "");
             InputManager = new InputManager();
             
         }
@@ -71,6 +72,7 @@ namespace Hänga_Gubbe
 
             EraseLastCharFunction();
             ClearWordFunction();
+            AddSpaceFunction();
 
             if (InputManager.MouseRec().Intersects(saveButton.buttonRec()) && InputManager.MouseClick() == true)
             {
@@ -104,6 +106,7 @@ namespace Hänga_Gubbe
             saveButton.Draw(spriteBatch);
             eraseLastCharButton.Draw(spriteBatch);
             clearButton.Draw(spriteBatch);
+            spaceButton.Draw(spriteBatch);
         }
 
 
@@ -166,6 +169,14 @@ namespace Hänga_Gubbe
             if (InputManager.MouseRec().Intersects(clearButton.buttonRec()) && InputManager.MouseClick() == true)
             {
                 Reset();
+            }
+        }
+
+        public void AddSpaceFunction()
+        {
+            if (InputManager.MouseRec().Intersects(spaceButton.buttonRec()) && InputManager.MouseClick() == true)
+            {
+                word = word + " ";
             }
         }
     }
