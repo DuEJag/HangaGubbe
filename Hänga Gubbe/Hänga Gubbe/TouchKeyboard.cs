@@ -101,6 +101,8 @@ namespace Hänga_Gubbe
                         {
                             b.Eliminate();
                         }
+
+                        break;
                     }
                 }
             }
