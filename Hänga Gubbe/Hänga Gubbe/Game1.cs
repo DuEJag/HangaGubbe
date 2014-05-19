@@ -65,7 +65,7 @@ namespace Hänga_Gubbe
             wordManager = new WordManager();
             buttonManager = new ButtonManager();
             layerManager = new LayerManager();
-            mainMenu = new MainMenu();
+            mainMenu = new MainMenu(this);
             addWordMenu = new AddWordMenu();
         }
 
