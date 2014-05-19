@@ -11,6 +11,8 @@ namespace Hänga_Gubbe
 {
     class MainMenu
     {
+        Game1 game1;
+
         public enum ButtonPressed
         {
             NONE,
@@ -21,8 +23,10 @@ namespace Hänga_Gubbe
         List<Button> buttonList;
         ButtonPressed isPressed = ButtonPressed.NONE;
 
-        public MainMenu()
+        public MainMenu(Game1 game1)
         {
+            this.game1 = game1;
+
             this.buttonList = new List<Button>();
 
             string playString = "En Spelare";
@@ -33,6 +37,10 @@ namespace Hänga_Gubbe
             Button addWordButton = new Button(TextureManager.buttonTex4x1, GetScalePos((1920 / 2 - TextureManager.buttonTex4x1.Width / 2),
                 (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 120)), "Lägg Till Ord");
             buttonList.Add(addWordButton);
+
+            Button exitButton = new Button(TextureManager.buttonTex4x1, GetScalePos((1920 / 2 - TextureManager.buttonTex4x1.Width / 2),
+                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 240)), "Avsluta");
+            buttonList.Add(exitButton);
         }
 
         private Vector2 GetScalePos(int xValue, int yValue)
@@ -54,6 +62,11 @@ namespace Hänga_Gubbe
 
                     if (b.TextChar() == 'l')
                         isPressed = ButtonPressed.WORD;
+
+                    if (b.TextString() == "Avsluta")
+                    {
+                        game1.Exit();
+                    }
                 }
             }
 
