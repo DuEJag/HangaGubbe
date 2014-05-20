@@ -38,12 +38,19 @@ namespace Hänga_Gubbe
             this.touchKeyboard = new TouchKeyboard(false);
             this.touchKeyboard.Initialize();
 
-            saveButton = new Button(TextureManager.buttonTex2x1, new Vector2(965, 864), "Spara");
-            clearButton = new Button(TextureManager.buttonTex2x1, new Vector2(1165, 864), "Rensa");
-            eraseLastCharButton = new Button(TextureManager.backbuttonTex, new Vector2(1365, 864), "");
-            spaceButton = new Button(TextureManager.spacebuttonTex, new Vector2(1458, 734), "");
+            saveButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1150, 900), "Spara");
+            clearButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1390, 900), "Rensa");
+            eraseLastCharButton = new Button(TextureManager.backbuttonTex, GetScalePos(1630, 900), "");
+            spaceButton = new Button(TextureManager.spacebuttonTex, GetScalePos(1750, 780), "");
             InputManager = new InputManager();
             
+        }
+
+        private Vector2 GetScalePos(int xValue, int yValue)
+        {
+            float xScale = (float)Decimal.Divide((decimal)xValue, (decimal)Game1.scaleX);
+            float yScale = (float)Decimal.Divide((decimal)yValue, (decimal)Game1.scaleY);
+            return new Vector2(xScale, yScale);
         }
 
 
