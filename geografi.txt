@@ -1,0 +1,109 @@
+﻿FLODER:
+Amazonfloden
+Mississippifloden
+Nilen
+Yangtze
+Ganges
+Mekong
+Donau
+Rhen
+Orinoco
+Volga
+Themsen
+
+STÄDER:
+Tokyo
+Jakarta
+Seoul
+Shanghai
+Mexico City
+Sao Paulo
+Bombay
+New York
+Osaka-Kobe-Kyoto
+Kairo
+Peking
+Dhaka
+Calcutta
+London
+Istanbul
+Karachi
+Los Angeles
+Buenos Aires
+Paris
+Bangkok
+Rio de Janeiro
+Manila
+Mosvka
+Guangzhou
+Shenzhen
+Chicago
+Lagos
+Nagoya
+Kinshasa
+Madras
+Tianjin
+Bangalore
+Lima
+Bogota
+Wuhan
+Dongguan
+Teheran
+Hyderabad
+Bandung
+Chongqing
+Rheinschiene
+Foshan
+Ho Chi Minh-staden
+
+BERG:
+Cho Oyu
+Makalu
+Mount Everest
+K2
+Lhotse
+Manaslu
+Broad Peak
+
+HAV: 
+Stilla havet
+Atlanten
+Arabiska havet
+Indiska oceanen
+Kaspiska havet
+Medelhavet
+Röda havet
+Svarta havet
+Persiska viken
+Bagdad
+Hongkong
+Taipei
+dallas
+Hanoi
+Ahmedabad
+
+SJÖAR:
+Michigan-Huron
+Övre sjön
+Victoria
+Tanganyikasjön
+Bajkalsjön
+Stora Björnsjön
+Malawisjön
+Stora Slavsjön
+Eriesjön
+Winnipegsjön
+Ontariosjön
+Balkhashsjön
+Ladoga
+Vostoksjön
+Onega
+Titicacasjön
+Nicaraguasjön
+Athabascasjön
+Vänern
+Vättern
+Mälaren
+Hjälmaren
+Siljan
+
