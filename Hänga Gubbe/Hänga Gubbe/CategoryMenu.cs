@@ -73,6 +73,7 @@ namespace Hänga_Gubbe
             {
                 b.Draw(spriteBatch);
             }
+            spriteBatch.Draw(TextureManager.kategoriTex, new Vector2(960 - TextureManager.kategoriTex.Width / 2, 200), Color.White);
         }
 
         public string Category()
