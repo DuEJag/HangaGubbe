@@ -14,7 +14,7 @@ namespace Hänga_Gubbe
         Button[] buttonArray = new Button[4];
         float xScale, yScale;
         int offset = 120, yPos = 300;
-        string cathegory = "";
+        string category = "";
 
         public CategoryMenu()
         {
@@ -38,16 +38,16 @@ namespace Hänga_Gubbe
                 if (InputManager.MouseRec().Intersects(b.buttonRec()) && InputManager.MouseClick())
                 {
                     if (b.TextChar() == 'l')
-                        cathegory = "Länder";
+                        category = "Länder";
 
                     if (b.TextChar() == 'a')
-                        cathegory = "Musiker";
+                        category = "Musiker";
 
                     if (b.TextChar() == 'd')
-                        cathegory = "Ord";
+                        category = "Ord";
 
                     if (b.TextChar() == 'm')
-                        cathegory = "MinaOrd";
+                        category = "MinaOrd";
                 }
             }
         }
@@ -63,8 +63,8 @@ namespace Hänga_Gubbe
 
         public string Category()
         {
-            string returnValue = cathegory;
-            cathegory = "";
+            string returnValue = category;
+            category = "";
             return returnValue;
         }
     }

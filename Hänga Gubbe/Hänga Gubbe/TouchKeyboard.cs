@@ -17,16 +17,17 @@ namespace Hänga_Gubbe
         bool isTouched = false;
         char myMessage;
         float xScale, yScale;
-        Button mainMenuButton;
         bool mainMenuIsPressed = false, isVanishing;
+        Point pos;
         
 
-        public TouchKeyboard(bool vanishing)
+        public TouchKeyboard(bool vanishing, Point pos)
         {
             //xScale = (float)Decimal.Divide((decimal)1100, (decimal)Game1.scaleX);
             //yScale = (float)Decimal.Divide((decimal)300, (decimal)Game1.scaleY);
+            this.pos = pos;
             this.distance = (int)Decimal.Divide((decimal)120, (decimal)(Game1.scaleX));
-            this.keyboardPosition = GetScalePos(1150, 300);
+            this.keyboardPosition = GetScalePos(pos.X, pos.Y);
             isVanishing = vanishing;
         }
 
@@ -70,19 +71,17 @@ namespace Hänga_Gubbe
             buttonArray[26] = new Button(TextureManager.buttonTex, new Vector2(keyboardPosition.X + distance * 2, keyboardPosition.Y + distance * 4), "Å");
             buttonArray[27] = new Button(TextureManager.buttonTex, new Vector2(keyboardPosition.X + distance * 3, keyboardPosition.Y + distance * 4), "Ä");
             buttonArray[28] = new Button(TextureManager.buttonTex, new Vector2(keyboardPosition.X + distance * 4, keyboardPosition.Y + distance * 4), "Ö");
-            mainMenuButton = new Button(TextureManager.buttonTex, new Vector2(300, 100), "Back");
         }
 
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TextureManager.keyBackGround, new Vector2(1110, 260), Color.Gray * 0.3f);
+            spriteBatch.Draw(TextureManager.keyBackGround, new Vector2(pos.X - 40, pos.Y - 40), Color.Gray * 0.3f);
             foreach (Button b in buttonArray)
             {
                 if (b != null)
                     b.Draw(spriteBatch);
             }
-            mainMenuButton.Draw(spriteBatch);
         }
 
 
@@ -106,11 +105,6 @@ namespace Hänga_Gubbe
                     }
                 }
             }
-
-            if (InputManager.MouseRec().Intersects(mainMenuButton.buttonRec()) && InputManager.MouseClick() == true)
-            {
-                mainMenuIsPressed = true;
-            }
         }
 
 
@@ -132,16 +126,7 @@ namespace Hänga_Gubbe
 
             return ' ';
         }
-
-
-        public bool GetMenuState()
-        {
-            bool returnValue = mainMenuIsPressed;
-            mainMenuIsPressed = false;
-            return returnValue;
-        }
-
-
+        
         public void Reset()
         {
             foreach (Button eachButton in buttonArray)

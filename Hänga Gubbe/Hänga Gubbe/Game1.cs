@@ -89,12 +89,12 @@ namespace Hänga_Gubbe
                 currentGameState = GameState.WORD_MENU;
             }
 
-            if (currentGameState == GameState.PLAYING && wordManager.GetMenuState() == true)
+            if (currentGameState == GameState.PLAYING && wordManager.GetBackButtonValue() == true)
             {
                 currentGameState = GameState.MAIN_MENU;
             }
 
-            if (currentGameState == GameState.WORD_MENU && addWordMenu.GetMenuState() == true)
+            if (currentGameState == GameState.WORD_MENU && addWordMenu.GetBackButtonValue() == true)
             {
                 currentGameState = GameState.MAIN_MENU;
             }

@@ -24,24 +24,23 @@ namespace Hänga_Gubbe
         TouchKeyboard touchKeyboard;
         string category = "", word = "", emptyString = "";
         EntryStage currentEntryStage = EntryStage.WORD;
+        bool isBackButtonPressed = false;
 
-        Button saveButton;
-        Button clearButton;
-        Button eraseLastCharButton;
-        Button spaceButton;
+        Button saveButton, clearButton, eraseLastCharButton, spaceButton, backButton;
 
         InputManager InputManager;
         FileSaver fileSaver;
 
         public AddWordMenu()
         {
-            this.touchKeyboard = new TouchKeyboard(false);
+            this.touchKeyboard = new TouchKeyboard(false, new Point(610, 300));
             this.touchKeyboard.Initialize();
 
-            saveButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1150, 900), "Spara");
-            clearButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1390, 900), "Rensa");
-            eraseLastCharButton = new Button(TextureManager.backbuttonTex, GetScalePos(1630, 900), "");
-            spaceButton = new Button(TextureManager.spacebuttonTex, GetScalePos(1750, 780), "");
+            backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(240, 900), "Tillbaka");
+            saveButton = new Button(TextureManager.buttonTex2x1, GetScalePos(640, 900), "Spara");
+            clearButton = new Button(TextureManager.buttonTex2x1, GetScalePos(880, 900), "Rensa");
+            eraseLastCharButton = new Button(TextureManager.backbuttonTex, GetScalePos(1120, 900), "");
+            spaceButton = new Button(TextureManager.spacebuttonTex, GetScalePos(1210, 780), "");
             InputManager = new InputManager();
             
         }
@@ -71,7 +70,7 @@ namespace Hänga_Gubbe
 
             if (currentEntryStage == EntryStage.WORD)
             {
-                if (pressedKey != ' ')
+                if (pressedKey != ' ' && word.Length < 30)
                 {
                     word += pressedKey;
                 }
@@ -101,15 +100,27 @@ namespace Hänga_Gubbe
 
                 Reset();
             }
+
+            if(InputManager.MouseRec().Intersects(backButton.buttonRec()) && InputManager.MouseClick())
+            {
+                isBackButtonPressed = true;
+            }
         }
 
+        public bool GetBackButtonValue()
+        {
+            bool returnValue = isBackButtonPressed;
+            isBackButtonPressed = false;
+            return returnValue;
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             touchKeyboard.Draw(spriteBatch);
 
-            spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(500, 500), Color.DarkSlateGray);
+            spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(960, 100), Color.DarkSlateGray, 0, TextureManager.fontStor.MeasureString(GetOutputString()) / 2, 1, SpriteEffects.None, 1);
 
+            backButton.Draw(spriteBatch);
             saveButton.Draw(spriteBatch);
             eraseLastCharButton.Draw(spriteBatch);
             clearButton.Draw(spriteBatch);
@@ -134,17 +145,6 @@ namespace Hänga_Gubbe
             return output;
         }
 
-
-        public bool GetMenuState()
-        {
-            if (touchKeyboard.GetMenuState() == true)
-            {
-                Reset();
-                return true;
-            }
-
-            return false;
-        }
 
         public void AddWord()
         {

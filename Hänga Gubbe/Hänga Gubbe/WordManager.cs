@@ -19,7 +19,8 @@ namespace Hänga_Gubbe
         Random rnd = new Random();
         public static List<char> testedChars = new List<char>();
         InputManager inputManager = new InputManager();
-        TouchKeyboard touchKeyboard = new TouchKeyboard(true);
+        TouchKeyboard touchKeyboard = new TouchKeyboard(true, new Point(1150, 300));
+        Button backButton, newWordButton;
         Hangman theHangman;
         CategoryMenu categoryMenu;
 
@@ -29,17 +30,27 @@ namespace Hänga_Gubbe
 
         bool isPlaying = true;
         bool categoryChosen = false;
+        bool isBackButtonPressed = false;
 
         public WordManager()
         {
             theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
+            newWordButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1425, 950), "Nytt ord");
+            backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1675, 950), "Tillbaka");
             categoryMenu = new CategoryMenu();
+        }
+
+        private Vector2 GetScalePos(int xValue, int yValue)
+        {
+            float xScale = (float)Decimal.Divide((decimal)xValue, (decimal)Game1.scaleX);
+            float yScale = (float)Decimal.Divide((decimal)yValue, (decimal)Game1.scaleY);
+            return new Vector2(xScale, yScale);
         }
 
         private void Initialize(string category)
         {
             touchKeyboard.Initialize();
-
+            strings.Clear();
             sR = new StreamReader(@"Content/" + category + ".txt");
 
 
@@ -89,6 +100,19 @@ namespace Hänga_Gubbe
             else
             {
                 categoryMenu.Update();
+            }
+
+            if (InputManager.MouseRec().Intersects(backButton.buttonRec()) && InputManager.MouseClick())
+            {
+                isBackButtonPressed = true;
+                categoryChosen = false;
+                //Initialize(category);
+                ResetWord();
+            }
+
+            if (InputManager.MouseRec().Intersects(newWordButton.buttonRec()) && InputManager.MouseClick())
+            {
+                ResetWord();
             }
         }
 
@@ -293,15 +317,26 @@ namespace Hänga_Gubbe
                     spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(500, 200), Color.Black);
                 }
 
-                spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(500, 500), Color.DarkSlateGray);
+                spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(960, 100), Color.DarkSlateGray, 0, TextureManager.fontStor.MeasureString(GetOutputString()) / 2, 1, SpriteEffects.None, 1);
                 spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.Black);
                 touchKeyboard.Draw(spriteBatch);
                 theHangman.Draw(spriteBatch);
+                newWordButton.Draw(spriteBatch);
             }
             else
             {
                 categoryMenu.Draw(spriteBatch);
             }
+
+            backButton.Draw(spriteBatch);
+            
+        }
+
+        public bool GetBackButtonValue()
+        {
+            bool returnValue = isBackButtonPressed;
+            isBackButtonPressed = false;
+            return returnValue;
         }
 
         public string GetOutputString()
@@ -343,10 +378,6 @@ namespace Hänga_Gubbe
             return output;
         }
 
-        public bool GetMenuState()
-        {
-            return touchKeyboard.GetMenuState();
-        }
 
         public void ResetWord()
         {
@@ -356,7 +387,10 @@ namespace Hänga_Gubbe
             testedChars = new List<char>();
             theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
             wordint = rnd.Next(numberOfWords);
-            touchKeyboard.Reset();
+            if (categoryChosen == true)
+            {
+                touchKeyboard.Reset(); 
+            }
         }
     }
 }
