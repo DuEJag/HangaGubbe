@@ -1,5 +1,4 @@
-﻿FLODER:
-Amazonfloden
+﻿Amazonfloden
 Mississippifloden
 Nilen
 Yangtze
@@ -10,8 +9,6 @@ Rhen
 Orinoco
 Volga
 Themsen
-
-STÄDER:
 Tokyo
 Jakarta
 Seoul
@@ -55,8 +52,6 @@ Chongqing
 Rheinschiene
 Foshan
 Ho Chi Minh-staden
-
-BERG:
 Cho Oyu
 Makalu
 Mount Everest
@@ -64,8 +59,6 @@ K2
 Lhotse
 Manaslu
 Broad Peak
-
-HAV: 
 Stilla havet
 Atlanten
 Arabiska havet
@@ -81,8 +74,6 @@ Taipei
 dallas
 Hanoi
 Ahmedabad
-
-SJÖAR:
 Michigan-Huron
 Övre sjön
 Victoria
@@ -106,4 +97,3 @@ Vättern
 Mälaren
 Hjälmaren
 Siljan
-

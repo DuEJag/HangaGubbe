@@ -1,0 +1,293 @@
+﻿Amazonfloden
+Mississippifloden
+Nilen
+Yangtze
+Ganges
+Mekong
+Donau
+Rhen
+Orinoco
+Volga
+Themsen
+Tokyo
+Jakarta
+Seoul
+Shanghai
+Mexico City
+Sao Paulo
+Bombay
+New York
+Osaka-Kobe-Kyoto
+Kairo
+Peking
+Dhaka
+Calcutta
+London
+Istanbul
+Karachi
+Los Angeles
+Buenos Aires
+Paris
+Bangkok
+Rio de Janeiro
+Manila
+Mosvka
+Guangzhou
+Shenzhen
+Chicago
+Lagos
+Nagoya
+Kinshasa
+Madras
+Tianjin
+Bangalore
+Lima
+Bogota
+Wuhan
+Dongguan
+Teheran
+Hyderabad
+Bandung
+Chongqing
+Rheinschiene
+Foshan
+Ho Chi Minh-staden
+Cho Oyu
+Makalu
+Mount Everest
+K2
+Lhotse
+Manaslu
+Broad Peak
+Stilla havet
+Atlanten
+Arabiska havet
+Indiska oceanen
+Kaspiska havet
+Medelhavet
+Röda havet
+Svarta havet
+Persiska viken
+Bagdad
+Hongkong
+Taipei
+dallas
+Hanoi
+Ahmedabad
+Michigan-Huron
+Övre sjön
+Victoria
+Tanganyikasjön
+Bajkalsjön
+Stora Björnsjön
+Malawisjön
+Stora Slavsjön
+Eriesjön
+Winnipegsjön
+Ontariosjön
+Balkhashsjön
+Ladoga
+Vostoksjön
+Onega
+Titicacasjön
+Nicaraguasjön
+Athabascasjön
+Vänern
+Vättern
+Mälaren
+Hjälmaren
+Siljan
+Afghanistan
+Albanien
+Algeriet
+Andorra
+Angola
+Antigua och Barbuda
+Argentina
+Armenien
+Australien
+Azerbajdzjan
+Bahamas
+Bahrain
+Bangladesh
+Barbados
+Belgien
+Belize
+Benin
+Bhutan
+Bolivia
+Bosnien och Hercegovina
+Botswana
+Brasilien
+Brunei
+Bulgarien
+Burkina Faso
+Burma
+Burundi
+Canada
+Centralafrikanska republiken
+Chile
+Colombia
+Comorerna
+Costa Rica
+Cuba
+Cypern
+Danmark
+Djibouti
+Dominica
+Dominikanska republiken
+Ecuador
+Egypten
+Ekvatorialguinea
+El Salvador
+Elfenbenskusten
+Eritrea
+Estland
+Etiopien
+Fiji
+Filippinerna
+Finland
+Frankrike 
+Förenade arabemiraten
+Gabon
+Gambia
+Georgien
+Ghana
+Grekland
+Grenada
+Guatemala
+Guinea
+Guinea-Bissau
+Guyana
+Haiti
+Honduras
+Indien
+Indonesien
+Irak
+Iran
+Irland
+Island
+Israel
+Italien
+Jamaica
+Japan
+Jordanien
+Kambodja
+Kamerun
+Kap Verde
+Kazakstan
+Kenya
+Kina
+Kirgizistan
+Kiribati
+Kongo
+Kosovo
+Kroatien
+Kuwait
+Laos
+Lesotho
+Lettland
+Libanon
+Liberia
+Libyen
+Liechtenstein
+Litauen
+Luxemburg
+Madagaskar
+Makedonien
+Malawi
+Malaysia
+Maldiverna
+Mali
+Malta
+Marocko
+Marshallöarna
+Mauretanien
+Mauritius
+Mexico
+Mikronesien
+Mocambique
+Moldavien
+Monaco
+Mongoliet
+Montenegro
+Namibia
+Nauru
+Nederländerna
+Nepal
+Nicaragua
+Niger
+Nigeria
+Nordkorea
+Norge
+Nya Zeeland
+Oman
+Pakistan
+Palau
+Panama
+Papua Nya Guinea
+Paraguay
+Peru
+Polen
+Portugal 
+Qatar
+Rumänien
+Rwanda
+Ryssland
+Saint Christopher och Nevis
+Saint Lucia
+Saint Vincent och Grenadinerna
+Salomonöarna
+Samoa
+San Marino
+Sao Tome och Principe
+Saudiarabien
+Schweiz
+Senegal
+Serbien
+Seychellerna
+Sierra Leone
+Singapore
+Slovakien
+Slovenien
+Somalia
+Spanien
+Sri Lanka
+Storbritannien
+Sudan
+Surinam
+Swaziland
+Sverige
+Sydafrika
+Sydkorea
+Syrien
+Tadzjikistan
+Taiwan
+Tanzania
+Tchad
+Thailand
+Tjeckien
+Togo
+Tonga
+Trinidad och Tobago
+Tunisien
+Turkiet
+Turkmenistan
+Tuvalu
+Tyskland
+Uganda
+Ukraina
+Ungern
+Uruguay
+USA
+Uzbekistan
+Vanuatu
+Vatikanstaten
+Venezuela
+Vietnam
+Vitryssland
+Yemen
+Zambia
+Zimbabwe
+Österrike
+Östtimor

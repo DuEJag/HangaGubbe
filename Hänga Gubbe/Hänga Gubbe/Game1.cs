@@ -100,7 +100,7 @@ namespace Hänga_Gubbe
             }
 
             buttonManager.Update(gameTime);
-            layerManager.Update();
+            layerManager.UpdateClouds();
 
             if (currentGameState == GameState.PLAYING)
             {
@@ -110,6 +110,7 @@ namespace Hänga_Gubbe
             if (currentGameState == GameState.MAIN_MENU)
             {
                 mainMenu.Update();
+                layerManager.Update();
             }
 
             if (currentGameState == GameState.WORD_MENU)

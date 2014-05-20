@@ -36,7 +36,7 @@ namespace Hänga_Gubbe
             this.touchKeyboard = new TouchKeyboard(false, new Point(610, 300));
             this.touchKeyboard.Initialize();
 
-            backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(240, 900), "Tillbaka");
+            backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1675, 950), "Tillbaka");
             saveButton = new Button(TextureManager.buttonTex2x1, GetScalePos(640, 900), "Spara");
             clearButton = new Button(TextureManager.buttonTex2x1, GetScalePos(880, 900), "Rensa");
             eraseLastCharButton = new Button(TextureManager.backbuttonTex, GetScalePos(1120, 900), "");

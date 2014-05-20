@@ -1,4 +1,4 @@
-Jesus
+﻿Jesus
 Napoleon
 Muhammad
 William Shakespeare
@@ -67,7 +67,7 @@ Andrew Jackson
 Constantine den store
 Socrates
 Elvis Presley
-William Er�vraren
+William Erövraren
 John F Kennedy
 Augustinus
 Vincent van Gogh
