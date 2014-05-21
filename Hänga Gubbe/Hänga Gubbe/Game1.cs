@@ -29,6 +29,7 @@ namespace Hänga_Gubbe
         {
             MAIN_MENU,
             PLAYING,
+            TWO_PLAYER,
             WORD_MENU
         }
 
@@ -44,9 +45,9 @@ namespace Hänga_Gubbe
 
         protected override void Initialize()
         {
-            //graphics.PreferredBackBufferHeight = 1080;
-            //graphics.PreferredBackBufferWidth = 1920;
-            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 1920;
+            //graphics.IsFullScreen = true;
 
             scaleX = (float)Decimal.Divide(1920, GraphicsDevice.DisplayMode.Width);
             scaleY = (float)Decimal.Divide(1080, GraphicsDevice.DisplayMode.Height);
@@ -62,11 +63,12 @@ namespace Hänga_Gubbe
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //tex = Content.Load<Texture2D>("astroid");
             textureManager = new TextureManager(this.Content);
-            wordManager = new WordManager();
+            addWordMenu = new AddWordMenu();
+            wordManager = new WordManager(addWordMenu);
             buttonManager = new ButtonManager();
             layerManager = new LayerManager();
             mainMenu = new MainMenu(this);
-            addWordMenu = new AddWordMenu();
+            
         }
 
         protected override void Update(GameTime gameTime)
@@ -89,6 +91,11 @@ namespace Hänga_Gubbe
                 currentGameState = GameState.WORD_MENU;
             }
 
+            if (pressedMainMenuButton == MainMenu.ButtonPressed.TWO_PLAYER)
+            {
+                currentGameState = GameState.TWO_PLAYER;
+            }
+
             if (currentGameState == GameState.PLAYING && wordManager.GetBackButtonValue() == true)
             {
                 currentGameState = GameState.MAIN_MENU;
@@ -99,6 +106,11 @@ namespace Hänga_Gubbe
                 currentGameState = GameState.MAIN_MENU;
             }
 
+            if (currentGameState == GameState.TWO_PLAYER && addWordMenu.GetPlayButtonValue() == true)
+            {
+                currentGameState = GameState.PLAYING;
+            }
+
             buttonManager.Update(gameTime);
             layerManager.UpdateClouds();
 
@@ -107,14 +119,22 @@ namespace Hänga_Gubbe
                 wordManager.Update();
             }
 
+            if (currentGameState == GameState.TWO_PLAYER)
+            {
+                addWordMenu.isTwoPlayer = true;
+                addWordMenu.Update();
+            }
+
             if (currentGameState == GameState.MAIN_MENU)
             {
+                addWordMenu.isTwoPlayer = false;
                 mainMenu.Update();
                 layerManager.Update();
             }
 
             if (currentGameState == GameState.WORD_MENU)
             {
+                addWordMenu.isTwoPlayer = false;
                 addWordMenu.Update();
             }
 
@@ -139,8 +159,9 @@ namespace Hänga_Gubbe
             if (currentGameState == GameState.MAIN_MENU)
                 mainMenu.Draw(spriteBatch);
 
-            if (currentGameState == GameState.WORD_MENU)
+            if (currentGameState == GameState.WORD_MENU || currentGameState == GameState.TWO_PLAYER)
                 addWordMenu.Draw(spriteBatch);
+
 
             spriteBatch.End();
             base.Draw(gameTime);

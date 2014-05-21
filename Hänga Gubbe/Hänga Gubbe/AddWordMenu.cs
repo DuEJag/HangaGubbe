@@ -22,9 +22,11 @@ namespace Hänga_Gubbe
         }
 
         TouchKeyboard touchKeyboard;
-        string category = "", word = "", emptyString = "";
+        public string category = "", word = "", emptyString = "";
         EntryStage currentEntryStage = EntryStage.WORD;
         bool isBackButtonPressed = false;
+        bool isPlayButtonPressed = false;
+        public bool isTwoPlayer = false;
 
         Button saveButton, clearButton, eraseLastCharButton, spaceButton, backButton;
 
@@ -42,7 +44,7 @@ namespace Hänga_Gubbe
             eraseLastCharButton = new Button(TextureManager.backbuttonTex, GetScalePos(1120, 900), "");
             spaceButton = new Button(TextureManager.spacebuttonTex, GetScalePos(1210, 780), "");
             InputManager = new InputManager();
-            
+
         }
 
         private Vector2 GetScalePos(int xValue, int yValue)
@@ -62,7 +64,7 @@ namespace Hänga_Gubbe
 
             if (currentEntryStage == EntryStage.CATEGORY)
             {
-                if(pressedKey != ' ')
+                if (pressedKey != ' ')
                 {
                     category += pressedKey;
                 }
@@ -87,21 +89,31 @@ namespace Hänga_Gubbe
                     currentEntryStage = EntryStage.WORD;
                 }
 
+
                 if (currentEntryStage == EntryStage.WORD)
                 {
-                    AddWord();
+                    if (isTwoPlayer == false)
+                    {
+                        AddWord();
+                    }
+                    else
+                    {
+                        isPlayButtonPressed = true;
+                    }
                     currentEntryStage = EntryStage.EXIT;
                 }
+
+
             }
 
-            if (currentEntryStage == EntryStage.EXIT)
+            if (currentEntryStage == EntryStage.EXIT && isTwoPlayer == false)
             {
                 currentEntryStage = EntryStage.WORD;
 
                 Reset();
             }
 
-            if(InputManager.MouseRec().Intersects(backButton.buttonRec()) && InputManager.MouseClick())
+            if (InputManager.MouseRec().Intersects(backButton.buttonRec()) && InputManager.MouseClick())
             {
                 isBackButtonPressed = true;
             }
@@ -111,6 +123,13 @@ namespace Hänga_Gubbe
         {
             bool returnValue = isBackButtonPressed;
             isBackButtonPressed = false;
+            return returnValue;
+        }
+
+        public bool GetPlayButtonValue()
+        {
+            bool returnValue = isPlayButtonPressed;
+            isPlayButtonPressed = false;
             return returnValue;
         }
 
@@ -152,7 +171,7 @@ namespace Hänga_Gubbe
             {
                 fileSaver = new FileSaver("Content", "MinaOrd");
                 fileSaver.AddWord(word);
-                fileSaver.Save(); 
+                fileSaver.Save();
             }
         }
 
@@ -164,10 +183,10 @@ namespace Hänga_Gubbe
 
         public void EraseLastCharFunction()
         {
-            if(InputManager.MouseRec().Intersects(eraseLastCharButton.buttonRec()) && InputManager.MouseClick() == true)
+            if (InputManager.MouseRec().Intersects(eraseLastCharButton.buttonRec()) && InputManager.MouseClick() == true)
             {
-                if(word != emptyString)
-                word = word.Remove(word.Length - 1);
+                if (word != emptyString)
+                    word = word.Remove(word.Length - 1);
             }
         }
 

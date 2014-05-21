@@ -23,6 +23,7 @@ namespace Hänga_Gubbe
         Button backButton, newWordButton;
         Hangman theHangman;
         CategoryMenu categoryMenu;
+        AddWordMenu addWordMenu;
 
         int errors = 0;
         int maxErrors = 10;
@@ -32,8 +33,9 @@ namespace Hänga_Gubbe
         bool categoryChosen = false;
         bool isBackButtonPressed = false;
 
-        public WordManager()
+        public WordManager(AddWordMenu addWordMenu)
         {
+            this.addWordMenu = addWordMenu;
             theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
             newWordButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1425, 950), "Nytt ord");
             backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1675, 950), "Tillbaka");
@@ -50,18 +52,29 @@ namespace Hänga_Gubbe
         private void Initialize(string category)
         {
             touchKeyboard.Initialize();
-            strings.Clear();
-            sR = new StreamReader(@"Content/" + category + ".txt");
-
-
-            while (!sR.EndOfStream)
+            if (addWordMenu.isTwoPlayer == false)
             {
-                string s = sR.ReadLine();
-                strings.Add(s);
+                strings.Clear();
+                sR = new StreamReader(@"Content/" + category + ".txt");
+
+
+                while (!sR.EndOfStream)
+                {
+                    string s = sR.ReadLine();
+                    strings.Add(s);
+                }
+                sR.Close();
+                numberOfWords = strings.Count;
+                wordint = rnd.Next(strings.Count);
             }
-            sR.Close();
-            numberOfWords = strings.Count;
-            wordint = rnd.Next(strings.Count);
+
+            if (addWordMenu.isTwoPlayer == true)
+            {
+                categoryChosen = true;
+                strings.Clear();
+                strings.Add(addWordMenu.word);
+                wordint = 0;
+            }
 
         }
 
@@ -76,7 +89,13 @@ namespace Hänga_Gubbe
                 categoryChosen = true;
                 Initialize(category);
             }
-            
+
+            else if (categoryChosen == false && addWordMenu.isTwoPlayer == true)
+            {
+                categoryChosen = true;
+                Initialize(category);
+            }
+
 
             if (categoryChosen == true)
             {
@@ -84,7 +103,7 @@ namespace Hänga_Gubbe
                 {
                     isPlaying = false;
                 }
-                
+
                 if (isPlaying == true)
                 {
                     touchKeyboard.Update();
@@ -329,7 +348,7 @@ namespace Hänga_Gubbe
             }
 
             backButton.Draw(spriteBatch);
-            
+
         }
 
         public bool GetBackButtonValue()
@@ -343,30 +362,63 @@ namespace Hänga_Gubbe
         {
             string output = "";
 
-            for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
+            if (addWordMenu.isTwoPlayer == false)
             {
-                bool solvedLetter = false;
-
-                foreach (char testedChar in testedChars)
+                for (int letterIndex = 0; letterIndex < strings[wordint].Length; letterIndex++)
                 {
-                    if (strings[wordint][letterIndex] == testedChar)
+                    bool solvedLetter = false;
+
+                    foreach (char testedChar in testedChars)
                     {
-                        solvedLetter = true;
+                        if (strings[wordint][letterIndex] == testedChar)
+                        {
+                            solvedLetter = true;
+                        }
                     }
-                }
 
-                if (solvedLetter == true)
+                    if (solvedLetter == true)
+                    {
+                        output += strings[wordint][letterIndex];
+                    }
+                    else
+                    {
+                        if (strings[wordint][letterIndex] != ' ' && strings[wordint][letterIndex] != '-')
+                            output += '_';
+                        if (strings[wordint][letterIndex] == ' ')
+                            output += ' ';
+                        if (strings[wordint][letterIndex] == '-')
+                            output += '-';
+                    }
+                } 
+            }
+
+            if (addWordMenu.isTwoPlayer == true)
+            {
+                for (int letterIndex = 0; letterIndex < strings[0].Length; letterIndex++)
                 {
-                    output += strings[wordint][letterIndex];
-                }
-                else
-                {
-                    if (strings[wordint][letterIndex] != ' ' && strings[wordint][letterIndex] != '-')
-                        output += '_';
-                    if (strings[wordint][letterIndex] == ' ')
-                        output += ' ';
-                    if (strings[wordint][letterIndex] == '-')
-                        output += '-';
+                    bool solvedLetter = false;
+
+                    foreach (char testedChar in testedChars)
+                    {
+                        if (strings[0][letterIndex] == testedChar)
+                        {
+                            solvedLetter = true;
+                        }
+                    }
+
+                    if (solvedLetter == true)
+                    {
+                        output += strings[0][letterIndex];
+                    }
+                    else
+                    {
+                        if (strings[0][letterIndex] != ' ' && strings[0][letterIndex] != '-')
+                            output += '_';
+                        if (strings[0][letterIndex] == ' ')
+                            output += ' ';
+                        if (strings[0][letterIndex] == '-')
+                            output += '-';
+                    }
                 }
             }
 
@@ -389,7 +441,7 @@ namespace Hänga_Gubbe
             wordint = rnd.Next(numberOfWords);
             if (categoryChosen == true)
             {
-                touchKeyboard.Reset(); 
+                touchKeyboard.Reset();
             }
         }
     }

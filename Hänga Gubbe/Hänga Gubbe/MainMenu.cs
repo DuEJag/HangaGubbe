@@ -17,6 +17,7 @@ namespace Hänga_Gubbe
         {
             NONE,
             GAME,
+            TWO_PLAYER,
             WORD
         }
 
@@ -63,6 +64,9 @@ namespace Hänga_Gubbe
                 {
                     if(b.TextChar() == 'e')
                         isPressed = ButtonPressed.GAME;
+
+                    if (b.TextChar() == 't')
+                        isPressed = ButtonPressed.TWO_PLAYER;
 
                     if (b.TextChar() == 'l')
                         isPressed = ButtonPressed.WORD;
