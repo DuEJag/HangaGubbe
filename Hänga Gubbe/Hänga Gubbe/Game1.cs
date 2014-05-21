@@ -45,9 +45,9 @@ namespace Hänga_Gubbe
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferHeight = 1080;
-            graphics.PreferredBackBufferWidth = 1920;
-            //graphics.IsFullScreen = true;
+            //graphics.PreferredBackBufferHeight = 1080;
+            //graphics.PreferredBackBufferWidth = 1920;
+            graphics.IsFullScreen = true;
 
             scaleX = (float)Decimal.Divide(1920, GraphicsDevice.DisplayMode.Width);
             scaleY = (float)Decimal.Divide(1080, GraphicsDevice.DisplayMode.Height);
