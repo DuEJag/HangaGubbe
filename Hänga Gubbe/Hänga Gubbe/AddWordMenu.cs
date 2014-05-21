@@ -25,7 +25,7 @@ namespace Hänga_Gubbe
         public string category = "", word = "", emptyString = "";
         EntryStage currentEntryStage = EntryStage.WORD;
         bool isBackButtonPressed = false;
-        bool isPlayButtonPressed = false;
+        public bool isPlayButtonPressed = false;
         public bool isTwoPlayer = false;
 
         Button saveButton, clearButton, eraseLastCharButton, spaceButton, backButton;
@@ -39,12 +39,17 @@ namespace Hänga_Gubbe
             this.touchKeyboard.Initialize();
 
             backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1675, 950), "Tillbaka");
-            saveButton = new Button(TextureManager.buttonTex2x1, GetScalePos(640, 900), "Spara");
-            clearButton = new Button(TextureManager.buttonTex2x1, GetScalePos(880, 900), "Rensa");
-            eraseLastCharButton = new Button(TextureManager.backbuttonTex, GetScalePos(1120, 900), "");
+            saveButton = new Button(TextureManager.buttonTex2x1, GetScalePos(670, 950), "Spara");
+            clearButton = new Button(TextureManager.buttonTex2x1, GetScalePos(910, 950), "Rensa");
+            eraseLastCharButton = new Button(TextureManager.backbuttonTex, GetScalePos(1150, 950), "");
             spaceButton = new Button(TextureManager.spacebuttonTex, GetScalePos(1210, 780), "");
             InputManager = new InputManager();
 
+        }
+
+        public void SaveButtonText(string text)
+        {
+            saveButton = new Button(TextureManager.buttonTex2x1, GetScalePos(670, 950), text);
         }
 
         private Vector2 GetScalePos(int xValue, int yValue)
@@ -95,11 +100,10 @@ namespace Hänga_Gubbe
                     if (isTwoPlayer == false)
                     {
                         AddWord();
+                        Reset();
                     }
-                    else
-                    {
-                        isPlayButtonPressed = true;
-                    }
+                    GetOutputString();
+                    isPlayButtonPressed = true;
                     currentEntryStage = EntryStage.EXIT;
                 }
 
@@ -177,6 +181,7 @@ namespace Hänga_Gubbe
 
         public void Reset()
         {
+            currentEntryStage = EntryStage.WORD;
             category = "";
             word = "";
         }

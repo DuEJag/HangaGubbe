@@ -88,20 +88,38 @@ namespace Hänga_Gubbe
 
             if (pressedMainMenuButton == MainMenu.ButtonPressed.WORD)
             {
+                addWordMenu.SaveButtonText("Spara");
                 currentGameState = GameState.WORD_MENU;
             }
 
             if (pressedMainMenuButton == MainMenu.ButtonPressed.TWO_PLAYER)
             {
+                addWordMenu.SaveButtonText("Spela");
                 currentGameState = GameState.TWO_PLAYER;
             }
 
             if (currentGameState == GameState.PLAYING && wordManager.GetBackButtonValue() == true)
             {
+                addWordMenu.Reset();
+                addWordMenu.isTwoPlayer = false;
+                wordManager.ResetTwoPlayerWord();
                 currentGameState = GameState.MAIN_MENU;
             }
 
+            if (currentGameState == GameState.PLAYING && wordManager.GetNewWordButtonValue() == true)
+            {
+                addWordMenu.Reset();
+                addWordMenu.isTwoPlayer = true;
+                wordManager.ResetTwoPlayerWord();
+                currentGameState = GameState.TWO_PLAYER;
+            }
+
             if (currentGameState == GameState.WORD_MENU && addWordMenu.GetBackButtonValue() == true)
+            {
+                currentGameState = GameState.MAIN_MENU;
+            }
+
+            if (currentGameState == GameState.TWO_PLAYER && addWordMenu.GetBackButtonValue() == true)
             {
                 currentGameState = GameState.MAIN_MENU;
             }
@@ -111,8 +129,11 @@ namespace Hänga_Gubbe
                 currentGameState = GameState.PLAYING;
             }
 
+            
+
             buttonManager.Update(gameTime);
             layerManager.UpdateClouds();
+            wordManager.GetNewWord();
 
             if (currentGameState == GameState.PLAYING)
             {
@@ -162,7 +183,7 @@ namespace Hänga_Gubbe
             if (currentGameState == GameState.WORD_MENU || currentGameState == GameState.TWO_PLAYER)
                 addWordMenu.Draw(spriteBatch);
 
-
+            //spriteBatch.DrawString(TextureManager.fontStor, " " + currentGameState, Vector2.Zero, Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -32,6 +32,7 @@ namespace Hänga_Gubbe
         bool isPlaying = true;
         bool categoryChosen = false;
         bool isBackButtonPressed = false;
+        bool isNewWordButtonTwoPPressed = false, isNewWordButtonPressed = false;
 
         public WordManager(AddWordMenu addWordMenu)
         {
@@ -81,7 +82,7 @@ namespace Hänga_Gubbe
         public void Update()
         {
             //inputManager.Update();
-
+            strings.Add(addWordMenu.word);
             string category = categoryMenu.Category();
 
             if (categoryChosen == false && category != "")
@@ -95,7 +96,7 @@ namespace Hänga_Gubbe
                 categoryChosen = true;
                 Initialize(category);
             }
-
+            
 
             if (categoryChosen == true)
             {
@@ -129,8 +130,15 @@ namespace Hänga_Gubbe
                 ResetWord();
             }
 
-            if (InputManager.MouseRec().Intersects(newWordButton.buttonRec()) && InputManager.MouseClick())
+            if (InputManager.MouseRec().Intersects(newWordButton.buttonRec()) && InputManager.MouseClick() && addWordMenu.isTwoPlayer == true)
             {
+                isNewWordButtonTwoPPressed = true;
+                ResetWord();
+            }
+
+            if (InputManager.MouseRec().Intersects(newWordButton.buttonRec()) && InputManager.MouseClick() && addWordMenu.isTwoPlayer == false)
+            {
+                isNewWordButtonPressed = true;
                 ResetWord();
             }
         }
@@ -358,6 +366,20 @@ namespace Hänga_Gubbe
             return returnValue;
         }
 
+        public bool GetNewWordButtonValue()
+        {
+            bool returnValue = isNewWordButtonTwoPPressed;
+            isNewWordButtonTwoPPressed = false;
+            return returnValue;
+        }
+
+        public bool GetNewWordButtonTwoPValue()
+        {
+            bool returnValue = isNewWordButtonPressed;
+            isNewWordButtonPressed = false;
+            return returnValue;
+        }
+
         public string GetOutputString()
         {
             string output = "";
@@ -422,10 +444,10 @@ namespace Hänga_Gubbe
                 }
             }
 
-            if (output == strings[wordint])
-                Console.WriteLine("You win!");
-            if (errors == maxErrors)
-                Console.WriteLine("You Lose!");
+            //if (output == strings[wordint])
+            //    Console.WriteLine("You win!");
+            //if (errors == maxErrors)
+            //    Console.WriteLine("You Lose!");
 
             return output;
         }
@@ -442,6 +464,30 @@ namespace Hänga_Gubbe
             if (categoryChosen == true)
             {
                 touchKeyboard.Reset();
+            }
+        }
+
+        public void ResetTwoPlayerWord()
+        {
+            strings.Clear();
+            isPlaying = true;
+            errors = 0;
+            maxErrors = 10;
+            testedChars = new List<char>();
+            theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
+            wordint = 0;
+            if (categoryChosen == true)
+            {
+                touchKeyboard.Reset();
+            }
+        }
+
+        public void GetNewWord()
+        {
+            if (addWordMenu.GetPlayButtonValue() == true)
+            {
+                categoryChosen = true;
+                Initialize("MinaOrd");
             }
         }
     }
