@@ -81,7 +81,6 @@ namespace Hänga_Gubbe
 
         public void Update()
         {
-            //inputManager.Update();
             strings.Add(addWordMenu.word);
             string category = categoryMenu.Category();
 
@@ -126,7 +125,6 @@ namespace Hänga_Gubbe
             {
                 isBackButtonPressed = true;
                 categoryChosen = false;
-                //Initialize(category);
                 ResetWord();
             }
 
@@ -341,11 +339,11 @@ namespace Hänga_Gubbe
             {
                 if (errors == maxErrors)
                 {
-                    spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(500, 200), Color.Black);
+                    spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(960, 210), Color.Black, 0, TextureManager.font.MeasureString(strings[wordint]) / 2, 1, SpriteEffects.None, 1);
                 }
 
                 spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(960, 100), Color.DarkSlateGray, 0, TextureManager.fontStor.MeasureString(GetOutputString()) / 2, 1, SpriteEffects.None, 1);
-                spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(20, 50), Color.Black);
+                spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(50, 50), Color.Black);
                 touchKeyboard.Draw(spriteBatch);
                 theHangman.Draw(spriteBatch);
                 newWordButton.Draw(spriteBatch);

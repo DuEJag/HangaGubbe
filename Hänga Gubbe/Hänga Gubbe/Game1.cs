@@ -23,7 +23,7 @@ namespace Hänga_Gubbe
         MainMenu mainMenu;
         AddWordMenu addWordMenu;
         
-        public static float scaleX, scaleY;
+        public static float scaleX, scaleY; //Scale-variabler som behövs för att få objekt att hamna på rätt plats när man använder annan skärmupplösning än 1080p.
 
         enum GameState
         {
@@ -33,7 +33,7 @@ namespace Hänga_Gubbe
             WORD_MENU
         }
 
-        GameState currentGameState = GameState.MAIN_MENU;
+        GameState currentGameState = GameState.MAIN_MENU; //Startar spelet på huvudmenyn.
 
         public Game1()
             : base()
@@ -49,7 +49,7 @@ namespace Hänga_Gubbe
             //graphics.PreferredBackBufferWidth = 1920;
             graphics.IsFullScreen = true;
 
-            scaleX = (float)Decimal.Divide(1920, GraphicsDevice.DisplayMode.Width);
+            scaleX = (float)Decimal.Divide(1920, GraphicsDevice.DisplayMode.Width); //Skalan ändras utifrån skärmens upplösning
             scaleY = (float)Decimal.Divide(1080, GraphicsDevice.DisplayMode.Height);
             graphics.ApplyChanges();
             base.Initialize();
@@ -57,14 +57,10 @@ namespace Hänga_Gubbe
 
         protected override void LoadContent()
         {
-            //Window.IsBorderless = true;
-
-
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            //tex = Content.Load<Texture2D>("astroid");
             textureManager = new TextureManager(this.Content);
             addWordMenu = new AddWordMenu();
-            wordManager = new WordManager(addWordMenu);
+            wordManager = new WordManager(addWordMenu); //Skickar med addWordMenu för att kunna använda objektet inne i WordManager.
             buttonManager = new ButtonManager();
             layerManager = new LayerManager();
             mainMenu = new MainMenu(this);
@@ -79,7 +75,7 @@ namespace Hänga_Gubbe
 
             InputManager.Update();
 
-            MainMenu.ButtonPressed pressedMainMenuButton = mainMenu.GetMenuMode();
+            MainMenu.ButtonPressed pressedMainMenuButton = mainMenu.GetMenuMode(); //Hämtar vilken knapp i huvudmenyn som spelaren tryckt på.
 
             if (pressedMainMenuButton == MainMenu.ButtonPressed.GAME)
             {
@@ -166,12 +162,10 @@ namespace Hänga_Gubbe
         {
             var vWidth = 1920;
             var vHeight = 1080;
-            var scale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f);
-            //Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f)
+            var scale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f); //Skalar om alla texturer i spelet till nuvarande skärmupplösning
             GraphicsDevice.Clear(Color.LightBlue);
-            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scale);
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scale); //Skickar med den skapade scale-variablen
             layerManager.Draw(spriteBatch);
-            //spriteBatch.Draw(tex, Vector2.Zero, Color.White);
             buttonManager.Draw(spriteBatch);
 
             if (currentGameState == GameState.PLAYING)
@@ -183,7 +177,6 @@ namespace Hänga_Gubbe
             if (currentGameState == GameState.WORD_MENU || currentGameState == GameState.TWO_PLAYER)
                 addWordMenu.Draw(spriteBatch);
 
-            //spriteBatch.DrawString(TextureManager.fontStor, " " + currentGameState, Vector2.Zero, Color.Black);
             spriteBatch.End();
             base.Draw(gameTime);
         }
