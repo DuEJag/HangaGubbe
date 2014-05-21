@@ -34,12 +34,16 @@ namespace Hänga_Gubbe
                 (1080 / 2 - TextureManager.buttonTex4x1.Height / 2)), playString);
             buttonList.Add(playButton);
 
+            Button twoPlayerButton = new Button(TextureManager.buttonTex4x1, GetScalePos((1920 / 2 - TextureManager.buttonTex4x1.Width / 2),
+                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 120)), "Två Spelare");
+            buttonList.Add(twoPlayerButton);
+
             Button addWordButton = new Button(TextureManager.buttonTex4x1, GetScalePos((1920 / 2 - TextureManager.buttonTex4x1.Width / 2),
-                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 120)), "Lägg Till Ord");
+                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 240)), "Lägg Till Ord");
             buttonList.Add(addWordButton);
 
             Button exitButton = new Button(TextureManager.buttonTex4x1, GetScalePos((1920 / 2 - TextureManager.buttonTex4x1.Width / 2),
-                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 240)), "Avsluta");
+                (1080 / 2 - TextureManager.buttonTex4x1.Height / 2 + 360)), "Avsluta");
             buttonList.Add(exitButton);
         }
 
