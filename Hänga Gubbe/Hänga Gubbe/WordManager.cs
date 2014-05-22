@@ -37,7 +37,7 @@ namespace Hänga_Gubbe
         public WordManager(AddWordMenu addWordMenu)
         {
             this.addWordMenu = addWordMenu;
-            theHangman = new Hangman(new Vector2(50, 100), new Point(11, 0), new Point(900, 1080), maxErrors);
+            theHangman = new Hangman(new Vector2(50, 100), new Point(4, 3), new Point(900, 1080), maxErrors);
             newWordButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1425, 950), "Nytt ord");
             backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1675, 950), "Tillbaka");
             categoryMenu = new CategoryMenu();
@@ -464,7 +464,7 @@ namespace Hänga_Gubbe
             errors = 0;
             maxErrors = 11;
             testedChars = new List<char>();
-            theHangman = new Hangman(new Vector2(50, 100), new Point(11, 0), new Point(900, 1080), maxErrors);
+            theHangman = new Hangman(new Vector2(50, 100), new Point(4, 3), new Point(900, 1080), maxErrors);
             wordint = rnd.Next(numberOfWords);
             if (categoryChosen == true)
             {
@@ -479,7 +479,7 @@ namespace Hänga_Gubbe
             errors = 0;
             maxErrors = 11;
             testedChars = new List<char>();
-            theHangman = new Hangman(new Vector2(50, 100), new Point(11, 0), new Point(900, 1080), maxErrors);
+            theHangman = new Hangman(new Vector2(50, 100), new Point(4, 3), new Point(900, 1080), maxErrors);
             wordint = 0;
             if (categoryChosen == true)
             {

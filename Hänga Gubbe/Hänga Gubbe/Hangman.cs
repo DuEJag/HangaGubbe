@@ -26,14 +26,18 @@ namespace Hänga_Gubbe
             hangmanTex = TextureManager.hangmanTex;
         }
 
+        //Denna metod kallas på när man vill få nästa del av gubben att visas.
         public void NextFrame()
         {
-            currentFrame.X++;
-
-            if (currentFrame.X > 3)
+            if (currentFrame.X < amountOfFrames.X && currentFrame.Y < amountOfFrames.Y)
             {
-                currentFrame.Y++;
-                currentFrame.X = 0;
+                currentFrame.X++;
+
+                if (currentFrame.X > amountOfFrames.X -1)
+                {
+                    currentFrame.Y++;
+                    currentFrame.X = 0;
+                } 
             }
         }
 
