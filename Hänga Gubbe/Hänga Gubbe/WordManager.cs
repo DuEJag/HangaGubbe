@@ -349,9 +349,9 @@ namespace Hänga_Gubbe
                 spriteBatch.DrawString(TextureManager.font, "Kategori: " + categoryMenu.CategoryName(), new Vector2(1890, 70), Color.DarkSlateGray, 0, TextureManager.font.MeasureString("Kategori: " + categoryMenu.CategoryName()), 1, SpriteEffects.None, 1);
 
                 if (GetOutputString() == strings[wordint])
-                    spriteBatch.Draw(TextureManager.winTex, new Vector2(960 - TextureManager.winTex.Width / 2, 540 - TextureManager.winTex.Height / 2), Color.White * 0.9f);
+                    spriteBatch.Draw(TextureManager.winTex, new Vector2(960 - TextureManager.winTex.Width / 2, 565 - TextureManager.winTex.Height / 2), Color.White * 0.9f);
                 if (errors == maxErrors)
-                    spriteBatch.Draw(TextureManager.loseTex, new Vector2(960 - TextureManager.loseTex.Width / 2, 540 - TextureManager.loseTex.Height / 2), Color.White * 0.9f);
+                    spriteBatch.Draw(TextureManager.loseTex, new Vector2(960 - TextureManager.loseTex.Width / 2, 565 - TextureManager.loseTex.Height / 2), Color.White * 0.9f);
             }
             else
             {
