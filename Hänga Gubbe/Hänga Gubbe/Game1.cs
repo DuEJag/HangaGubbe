@@ -22,6 +22,7 @@ namespace Hänga_Gubbe
         LayerManager layerManager;
         MainMenu mainMenu;
         AddWordMenu addWordMenu;
+        float spriteFrame;
         
         public static float scaleX, scaleY; //Scale-variabler som behövs för att få objekt att hamna på rätt plats när man använder annan skärmupplösning än 1080p.
 
@@ -74,6 +75,10 @@ namespace Hänga_Gubbe
             IsMouseVisible = true;
 
             InputManager.Update();
+
+            spriteFrame += 0.23f;
+            if (spriteFrame >= 27)
+                spriteFrame = 0;
 
             MainMenu.ButtonPressed pressedMainMenuButton = mainMenu.GetMenuMode(); //Hämtar vilken knapp i huvudmenyn som spelaren tryckt på.
 
@@ -165,6 +170,7 @@ namespace Hänga_Gubbe
             var scale = Matrix.CreateScale((float)GraphicsDevice.Viewport.Width / vWidth, (float)GraphicsDevice.Viewport.Height / vHeight, 1f); //Skalar om alla texturer i spelet till nuvarande skärmupplösning
             GraphicsDevice.Clear(Color.LightBlue);
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scale); //Skickar med den skapade scale-variablen
+            spriteBatch.Draw(TextureManager.sunTex, new Vector2(-20, -20), Color.White);
             layerManager.Draw(spriteBatch);
             buttonManager.Draw(spriteBatch);
 
@@ -172,7 +178,10 @@ namespace Hänga_Gubbe
                 wordManager.Draw(spriteBatch);
 
             if (currentGameState == GameState.MAIN_MENU)
+            {
+                spriteBatch.Draw(TextureManager.hangmanTex2, new Vector2(930, 250), new Rectangle(150 * (int)spriteFrame, 0, 150, 200), Color.White);
                 mainMenu.Draw(spriteBatch);
+            }
 
             if (currentGameState == GameState.WORD_MENU || currentGameState == GameState.TWO_PLAYER)
                 addWordMenu.Draw(spriteBatch);

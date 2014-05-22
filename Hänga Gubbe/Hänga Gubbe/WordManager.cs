@@ -26,7 +26,7 @@ namespace Hänga_Gubbe
         AddWordMenu addWordMenu;
 
         int errors = 0;
-        int maxErrors = 10;
+        int maxErrors = 11;
         int numberOfWords;
 
         bool isPlaying = true;
@@ -37,7 +37,7 @@ namespace Hänga_Gubbe
         public WordManager(AddWordMenu addWordMenu)
         {
             this.addWordMenu = addWordMenu;
-            theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
+            theHangman = new Hangman(new Vector2(50, 100), new Point(11, 0), new Point(900, 1080), maxErrors);
             newWordButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1425, 950), "Nytt ord");
             backButton = new Button(TextureManager.buttonTex2x1, GetScalePos(1675, 950), "Tillbaka");
             categoryMenu = new CategoryMenu();
@@ -343,7 +343,7 @@ namespace Hänga_Gubbe
                 }
 
                 spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(960, 100), Color.DarkSlateGray, 0, TextureManager.fontStor.MeasureString(GetOutputString()) / 2, 1, SpriteEffects.None, 1);
-                spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(50, 50), Color.Black);
+                spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(1700, 50), Color.Black);
                 touchKeyboard.Draw(spriteBatch);
                 theHangman.Draw(spriteBatch);
                 newWordButton.Draw(spriteBatch);
@@ -455,9 +455,9 @@ namespace Hänga_Gubbe
         {
             isPlaying = true;
             errors = 0;
-            maxErrors = 10;
+            maxErrors = 11;
             testedChars = new List<char>();
-            theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
+            theHangman = new Hangman(new Vector2(50, 100), new Point(11, 0), new Point(900, 1080), maxErrors);
             wordint = rnd.Next(numberOfWords);
             if (categoryChosen == true)
             {
@@ -470,9 +470,9 @@ namespace Hänga_Gubbe
             strings.Clear();
             isPlaying = true;
             errors = 0;
-            maxErrors = 10;
+            maxErrors = 11;
             testedChars = new List<char>();
-            theHangman = new Hangman(new Vector2(250, 400), new Point(12, 0), new Point(150, 250), maxErrors);
+            theHangman = new Hangman(new Vector2(50, 100), new Point(11, 0), new Point(900, 1080), maxErrors);
             wordint = 0;
             if (categoryChosen == true)
             {
