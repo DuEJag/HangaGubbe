@@ -58,7 +58,6 @@ namespace Hänga_Gubbe
                 strings.Clear();
                 sR = new StreamReader(@"Content/" + category + ".txt");
 
-
                 while (!sR.EndOfStream)
                 {
                     string s = sR.ReadLine();
@@ -339,14 +338,15 @@ namespace Hänga_Gubbe
             {
                 if (errors == maxErrors)
                 {
-                    spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(960, 210), Color.Black, 0, TextureManager.font.MeasureString(strings[wordint]) / 2, 1, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(TextureManager.font, strings[wordint], new Vector2(960, 190), Color.Black, 0, TextureManager.font.MeasureString(strings[wordint]) / 2, 1, SpriteEffects.None, 1);
                 }
 
                 spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(960, 100), Color.DarkSlateGray, 0, TextureManager.fontStor.MeasureString(GetOutputString()) / 2, 1, SpriteEffects.None, 1);
-                spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(1700, 50), Color.Black);
+                //spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(1700, 50), Color.Black);
                 touchKeyboard.Draw(spriteBatch);
                 theHangman.Draw(spriteBatch);
                 newWordButton.Draw(spriteBatch);
+                spriteBatch.DrawString(TextureManager.font, "Kategori: " + categoryMenu.CategoryName(), new Vector2(1890, 70), Color.DarkSlateGray, 0, TextureManager.font.MeasureString("Kategori: " + categoryMenu.CategoryName()), 1, SpriteEffects.None, 1);
             }
             else
             {

@@ -14,7 +14,7 @@ namespace Hänga_Gubbe
         Button[] buttonArray = new Button[7];
         float xScale, yScale;
         int offset = 120, yPos = 350, xPos1 = 540, xPos2 = 980, xPos3 = 760;
-        string category = "";
+        string category = "", categoryName = "";
 
         public CategoryMenu()
         {
@@ -62,6 +62,8 @@ namespace Hänga_Gubbe
 
                     if (b.TextString() == "Mina Ord")
                         category = "MinaOrd";
+
+                    categoryName = b.TextString();
                 }
             }
         }
@@ -81,6 +83,11 @@ namespace Hänga_Gubbe
             string returnValue = category;
             category = "";
             return returnValue;
+        }
+
+        public string CategoryName()
+        {
+            return categoryName;
         }
     }
 }
