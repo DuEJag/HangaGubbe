@@ -18,7 +18,6 @@ namespace Hänga_Gubbe
         Vector2 textLength;
         bool isClicked = false;
 
-        //if(this.FUNTION == LETTER){return action = chat.ToLower(buttonText[1])}
 
         public Button(Texture2D tex, Vector2 pos, string buttonText)
         {

@@ -57,7 +57,6 @@ namespace Hänga_Gubbe
 
         public void Update()
         {
-            //inputManager.Update();
             foreach (Button b in buttonList)
             {
                 if (InputManager.MouseRec().Intersects(b.buttonRec()) && InputManager.MouseClick())
@@ -87,7 +86,6 @@ namespace Hänga_Gubbe
                 b.Draw(spriteBatch);
             }
             spriteBatch.Draw(TextureManager.titelTex, new Vector2(460, 150), Color.White);
-            //spriteBatch.DrawString(TextureManager.fontStor, "Hänga Gubbe", new Vector2(700, 300), Color.White);
         }
 
         public ButtonPressed GetMenuMode()

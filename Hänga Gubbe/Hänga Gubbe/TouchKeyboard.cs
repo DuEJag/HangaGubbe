@@ -17,14 +17,12 @@ namespace Hänga_Gubbe
         bool isTouched = false;
         char myMessage;
         float xScale, yScale;
-        bool mainMenuIsPressed = false, isVanishing;
+        bool isVanishing;
         Point pos;
         
 
         public TouchKeyboard(bool vanishing, Point pos)
         {
-            //xScale = (float)Decimal.Divide((decimal)1100, (decimal)Game1.scaleX);
-            //yScale = (float)Decimal.Divide((decimal)300, (decimal)Game1.scaleY);
             this.pos = pos;
             this.distance = (int)Decimal.Divide((decimal)120, (decimal)(Game1.scaleX));
             this.keyboardPosition = GetScalePos(pos.X, pos.Y);

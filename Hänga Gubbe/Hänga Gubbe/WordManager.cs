@@ -43,7 +43,7 @@ namespace Hänga_Gubbe
             categoryMenu = new CategoryMenu();
         }
 
-        private Vector2 GetScalePos(int xValue, int yValue)
+        private Vector2 GetScalePos(int xValue, int yValue) //Ger rätt position på knapparna oavsett vilken upplösning skärmen har
         {
             float xScale = (float)Decimal.Divide((decimal)xValue, (decimal)Game1.scaleX);
             float yScale = (float)Decimal.Divide((decimal)yValue, (decimal)Game1.scaleY);
@@ -334,7 +334,7 @@ namespace Hänga_Gubbe
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (categoryChosen == true)
+            if (categoryChosen == true) //Ritar allt när man spelar ett ord
             {
                 if (errors == maxErrors)
                 {
@@ -342,18 +342,18 @@ namespace Hänga_Gubbe
                 }
 
                 spriteBatch.DrawString(TextureManager.fontStor, GetOutputString(), new Vector2(960, 100), Color.DarkSlateGray, 0, TextureManager.fontStor.MeasureString(GetOutputString()) / 2, 1, SpriteEffects.None, 1);
-                //spriteBatch.DrawString(TextureManager.font, "Errors: " + errors, new Vector2(1700, 50), Color.Black);
                 touchKeyboard.Draw(spriteBatch);
                 theHangman.Draw(spriteBatch);
                 newWordButton.Draw(spriteBatch);
                 spriteBatch.DrawString(TextureManager.font, "Kategori: " + categoryMenu.CategoryName(), new Vector2(1890, 70), Color.DarkSlateGray, 0, TextureManager.font.MeasureString("Kategori: " + categoryMenu.CategoryName()), 1, SpriteEffects.None, 1);
 
+                //if-satser som visar vinst- eller förlorarskärm när man vunnit respektive förlorat
                 if (GetOutputString() == strings[wordint])
                     spriteBatch.Draw(TextureManager.winTex, new Vector2(960 - TextureManager.winTex.Width / 2, 565 - TextureManager.winTex.Height / 2), Color.White * 0.9f);
                 if (errors == maxErrors)
                     spriteBatch.Draw(TextureManager.loseTex, new Vector2(960 - TextureManager.loseTex.Width / 2, 565 - TextureManager.loseTex.Height / 2), Color.White * 0.9f);
             }
-            else
+            else //Ritar kategorimenyn
             {
                 categoryMenu.Draw(spriteBatch);
             }
