@@ -17,7 +17,6 @@ namespace Hänga_Gubbe
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         WordManager wordManager;
-        ButtonManager buttonManager;
         TextureManager textureManager;
         LayerManager layerManager;
         MainMenu mainMenu;
@@ -62,7 +61,6 @@ namespace Hänga_Gubbe
             textureManager = new TextureManager(this.Content);
             addWordMenu = new AddWordMenu();
             wordManager = new WordManager(addWordMenu); //Skickar med addWordMenu för att kunna använda objektet inne i WordManager.
-            buttonManager = new ButtonManager();
             layerManager = new LayerManager();
             mainMenu = new MainMenu(this);
             
@@ -132,7 +130,6 @@ namespace Hänga_Gubbe
 
             
 
-            buttonManager.Update(gameTime);
             layerManager.UpdateClouds();
             wordManager.GetNewWord();
 
@@ -172,7 +169,6 @@ namespace Hänga_Gubbe
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, scale); //Skickar med den skapade scale-variablen
             spriteBatch.Draw(TextureManager.sunTex, new Vector2(-20, -20), Color.White);
             layerManager.Draw(spriteBatch);
-            buttonManager.Draw(spriteBatch);
 
             if (currentGameState == GameState.PLAYING)
                 wordManager.Draw(spriteBatch);

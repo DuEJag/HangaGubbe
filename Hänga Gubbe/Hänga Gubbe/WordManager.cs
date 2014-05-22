@@ -449,11 +449,6 @@ namespace Hänga_Gubbe
                 }
             }
 
-            //if (output == strings[wordint])
-            //    Console.WriteLine("You win!");
-            //if (errors == maxErrors)
-            //    Console.WriteLine("You Lose!");
-
             return output;
         }
 

@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="AddWordMenu.cs" />
     <Compile Include="Button.cs" />
-    <Compile Include="ButtonManager.cs" />
     <Compile Include="CategoryMenu.cs" />
     <Compile Include="FileSaver.cs" />
     <Compile Include="Game1.cs" />
