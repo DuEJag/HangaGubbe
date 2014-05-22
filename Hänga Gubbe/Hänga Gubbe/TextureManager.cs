@@ -12,7 +12,7 @@ namespace Hänga_Gubbe
     class TextureManager
     {
         public static Texture2D buttonTex, hillTex, hillTex2, cloudTex, cloudTex2, buttonTex4x1, buttonTex2x1, backbuttonTex, spacebuttonTex;
-        public static Texture2D hangmanTex, hangmanTex2, titelTex, keyBackGround, kategoriTex, sunTex;
+        public static Texture2D hangmanTex, hangmanTex2, titelTex, keyBackGround, kategoriTex, sunTex, winTex, loseTex;
         public static SpriteFont font, fontStor;
         public TextureManager(ContentManager Content)
         {
@@ -31,6 +31,8 @@ namespace Hänga_Gubbe
             cloudTex2 = Content.Load<Texture2D>("MolnBakomV2");
             sunTex = Content.Load<Texture2D>("LeSunV2");
             hangmanTex2 = Content.Load<Texture2D>("GubbeSpriteV5");
+            winTex = Content.Load<Texture2D>("vinstskärm");
+            loseTex = Content.Load<Texture2D>("förlustskärm");
 
             font = Content.Load<SpriteFont>("sffontbmp36");
             fontStor = Content.Load<SpriteFont>("sffontbmpStor");
